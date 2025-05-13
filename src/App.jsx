@@ -28,12 +28,13 @@ function App() {
           <div className="events_outside_container relative ">
             <div className="events_container m-8 h-full flex flex-col  rounded-md z-10 border border-solid border-white">
               <div className="events_card flex-1 flex-col rounded-md" id="events_card">
+                
                 <PreLiveMarketsTop />
+
                 {PRELIVE_MARKETS.map((market, index) => (
                 <PreLiveMarkets key={index} {...market} />
                 ))}
                                 
-
                 <Betslip />
               </div>
             </div>
