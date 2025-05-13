@@ -8,7 +8,7 @@ import Login from './components/Login';
 import SideBar from './components/SideBar';
 import Carousel from './components/Carousel';
 import Betslip from './components/BetSlip';
-import {PreLiveMarkets, PreLiveMarketsType } from './components/PreLiveMarkets';
+import {PreLiveMarkets, PreLiveMarketsType } from './components/Prelive/PreLiveMarkets';
 
 
 function App() {
@@ -28,11 +28,21 @@ function App() {
             <Carousel />
           </div>
           <div className="events_outside_container relative">
-            <div className="events_container m-8 h-full flex flex-col bg-gradient-to-r from-indigo-700 to-teal-700 rounded-md z-10">
-              <div className="events_card flex-1 flex-col bg-inherit rounded-md bg-blue-800" id="events_card">
+            <div className="events_container m-8 h-full flex flex-col bg-gradient-to-r from-dark-grey-700 to-teal-700 rounded-md z-10">
+              <div className="events_card flex-1 flex-col bg-inherit rounded-md " id="events_card">
                 <PreLiveMarketsType />
-                <PreLiveMarkets />
-                <PreLiveMarkets />
+                <PreLiveMarkets
+                  time="22:50"
+                  teamHome="Dortmund"
+                  teamAway="Wolfsburg"
+                  odds={['1.35', '500', '3.6']}
+                />                
+                <PreLiveMarkets
+                  time="22:50"
+                  teamHome="Dortmund"
+                  teamAway="Wolfsburg"
+                  odds={['1.55', '5123', '3.6']}
+                /> 
                 <PreLiveMarkets />
                 <PreLiveMarkets />
                 <Betslip />
