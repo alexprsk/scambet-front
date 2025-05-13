@@ -1,3 +1,5 @@
+import ScambetLogo from '../assets/ScambetLogo.png'
+
 export default function NavBar() {
   return (
     <nav className="bg-gradient-to-r from-black to-dark-grey-800">
@@ -30,7 +32,7 @@ export default function NavBar() {
           <div className="flex shrink-0 items-center">
             <a href="/">
               <img
-                src="static/ScambetLogo.png"
+                src={ ScambetLogo }
                 alt="Scambet logo"
                 style={{ width: "30%" }}
               />
