@@ -1,3 +1,5 @@
+
+
 export  function PreLiveMarketsType() {
     return (
             <div className="events_Type flex-row flex bg-inherit rounded-md h-8 mb-2 border-b border-b-solid border-b-gray-500">
@@ -28,24 +30,24 @@ export  function PreLiveMarketsType() {
 
 
 
-export  function PreLiveMarkets() {
+export  function PreLiveMarkets(props) {
     return (
     <div className="event_row flex-row flex bg-inherit hover:bg-indigo-500 mb-3 cursor-pointer rounded-md">
-        <div className="event_timer flex  items-center justify-start pl-1 mr-1 text-white text-sm">22:50
+        <div className="event_timer flex  items-center justify-start pl-1 mr-1 text-white text-sm">{props.time}
         </div>
         <div className="event_teams flex flex-col flex-1  ml-1 pl-2 items-left justify-start">
-        <div className="event_teams_home_1  flex text-white text-sm" id="event_teams_home_1">Dortmund</div>
-        <div className="event_teams_away_2 flex text-white text-sm" id="event_teams_away_2">Wokfsburg</div>
+        <div className="event_teams_home_1  flex text-white text-sm" id="event_teams_home_1">{props.hometeam}</div>
+        <div className="event_teams_away_2 flex text-white text-sm" id="event_teams_away_2">{props.awayteam}</div>
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">1.35</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[0]}</div>
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">500</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[1]}</div>
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">3.6</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[2]}</div>
         </div>
         </div>
     </div>
