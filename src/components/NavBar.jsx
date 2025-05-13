@@ -1,8 +1,8 @@
-import ScambetLogo from '../assets/ScambetLogo.png'
+import ScambetLogo from '../assets/ScambetLogo1.png'
 
 export default function NavBar() {
   return (
-    <nav className="bg-gradient-to-r from-black to-dark-grey-800">
+    <nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
       <div className="relative flex h-16 items-center justify-between">
         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button
@@ -34,7 +34,7 @@ export default function NavBar() {
               <img
                 src={ ScambetLogo }
                 alt="Scambet logo"
-                style={{ width: "30%" }}
+                style={{ width: "60%", height : "10%"}}
               />
             </a>
           </div>
@@ -79,7 +79,7 @@ export default function NavBar() {
             <button
               type="button"
               id="loginBtn"
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+              className="bg-emerald-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
               Login
             </button>

@@ -1,10 +1,10 @@
 
 
-export  function PreLiveMarketsType() {
+export  function PreLiveMarketsTop() {
     return (
-            <div className="events_Type flex-row flex bg-inherit rounded-md h-8 mb-2 border-b border-b-solid border-b-gray-500">
+            <div className="events_Type flex-row flex bg-inherit rounded h-8 mb-2 border border-b border-white">
               <div className="text_svg flex-1 flex">
-                <p className="text-white rounded-md flex "><strong>Pre-Live Markets</strong></p>
+                <p className="text-white rounded-md flex ml-1"><strong>Pre-Live Markets</strong></p>
                 <svg className="w-[19px] h-[19px] fill-[#8e8e8e]" viewBox="0 0 512 512"
                   xmlns="http://www.w3.org/2000/svg">
 
@@ -16,10 +16,10 @@ export  function PreLiveMarketsType() {
               </div>
               <div className="market_type1x2_pusher flex items-center justify-center text-white font-sans ml-12"></div>
               <div className="market_type1x2 flex-1">
-                <div className="market_type1x2 flex flex-row items-center justify-evenly h-full leading-xs text-n-48-slate text-center text-tiny s:text-xxs">
-                  <span className="flex-1">1</span>
-                  <span className="flex-1">x</span> 
-                  <span className="flex-1">2</span>
+                <div className="market_type1x2 flex flex-row items-center justify-evenly h-full leading-xs text-white  text-center text-tiny s:text-xxs">
+                  <span className="flex-1"><strong>1</strong></span>
+                  <span className="flex-1"><strong>x</strong></span> 
+                  <span className="flex-1"><strong>2</strong></span>
                 </div>
               </div>
             </div>        
@@ -32,7 +32,7 @@ export  function PreLiveMarketsType() {
 
 export  function PreLiveMarkets(props) {
     return (
-    <div className="event_row flex-row flex bg-inherit hover:bg-indigo-500 mb-3 cursor-pointer rounded-md">
+    <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-1 cursor-pointer rounded-md transition">
         <div className="event_timer flex  items-center justify-start pl-1 mr-1 text-white text-sm">{props.time}
         </div>
         <div className="event_teams flex flex-col flex-1  ml-1 pl-2 items-left justify-start">
@@ -41,13 +41,13 @@ export  function PreLiveMarkets(props) {
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[0]}</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition">{props.odds[0]}</div>
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[1]}</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 h-10 m-1  text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition">{props.odds[1]}</div>
         </div>
         <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap">{props.odds[2]}</div>
+            <div role="button" id="odds_sock" className="event_markets_selections_1x2 w-16 h-10 m-1  text-center text-gray-900 bg-teal-300 bg-opacity-20 border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition">{props.odds[2]}</div>
         </div>
         </div>
     </div>

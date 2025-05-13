@@ -5,7 +5,7 @@ export default function SideBar() {
         <nav>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="flex items-center p-2 hover:bg-indigo-600 rounded transition">
+              <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -18,7 +18,7 @@ export default function SideBar() {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center p-2 hover:bg-indigo-600 rounded transition">
+              <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -31,7 +31,7 @@ export default function SideBar() {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center p-2 hover:bg-indigo-600 rounded transition">
+              <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -49,7 +49,7 @@ export default function SideBar() {
         <h2 className="text-xl font-bold mt-8 mb-4 border-b border-gray-500 pb-2">Live Events</h2>
         <ul className="space-y-2">
           <li>
-            <a href="#" className="flex items-center p-2 hover:bg-indigo-600 rounded transition">
+            <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
               <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
               Dortmund vs Wolfsburg
             </a>
