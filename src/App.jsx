@@ -10,11 +10,22 @@ import {PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMa
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 
 function App() {
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleCloseLogin = () => {
+    setShowLoginModal(false);
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar onLoginClick={handleLoginClick}/>
       <Registration />
-      <Login />
+      <Login show={showLoginModal} onClose={handleCloseLogin} />
       <div className="relative min-h-screen flex">
         <SideBar />
         <div className="flex-1 flex-col">

@@ -1,8 +1,14 @@
-function Login() {
+function Login({show, onClose}) {
+  const handleOverlayClick = (e) => {
+    // Close only if the click is on the overlay itself
+    if (e.target.id === "loginModal") {
+      onClose();
+    }
+  };
   return (
-    <div
+    <div onClick={handleOverlayClick}
       id="loginModal"
-      className="fixed hidden inset-0 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+      className={`fixed ${show ? '' : 'hidden'} inset-0 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
     >
       <div className="relative top-20 mx-auto p-5 border w-11/12 md:max-w-md shadow-lg rounded-md bg-white">
         {/* Modal Content */}
@@ -10,7 +16,10 @@ function Login() {
           {/* Header */}
           <div className="flex justify-between items-center pb-3">
             <h3 className="text-xl font-bold text-gray-900">Login</h3>
-            <button id="loginFormCloseBtn" className="text-gray-400 hover:text-gray-600">
+            <button 
+              id="loginFormCloseBtn" 
+              className="text-gray-400 hover:text-gray-600"
+              onClick={onClose}>
               <span className="text-2xl">&times;</span>
             </button>
           </div>

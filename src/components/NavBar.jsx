@@ -1,6 +1,6 @@
 import ScambetLogo from '../assets/ScambetLogo1.png'
 
-export default function NavBar() {
+export default function NavBar( {onLoginClick} ) {
   return (
     <nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
       <div className="relative flex h-16 items-center justify-between">
@@ -76,7 +76,7 @@ export default function NavBar() {
               Register
             </button>
 
-            <button
+            <button  onClick={onLoginClick}
               type="button"
               id="loginBtn"
               className="bg-emerald-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
