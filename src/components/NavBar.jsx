@@ -1,45 +1,24 @@
 import ScambetLogo from '../assets/ScambetLogo1.png'
 
-export default function NavBar( {onLoginClick} ) {
+export default function NavBar({ onLoginClick, onRegisterClick }) {
   return (
     <nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
       <div className="relative flex h-16 items-center justify-between">
-        <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <button
-            type="button"
-            className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          >
-            <span className="absolute -inset-0.5"></span>
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="block h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </button>
-        </div>
 
-        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+
+        <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
           <div className="flex shrink-0 items-center">
             <a href="/">
               <img
-                src={ ScambetLogo }
+                src={ScambetLogo}
                 alt="Scambet logo"
-                style={{ width: "60%", height : "10%"}}
+                style={{ width: "60%", height: "10%" }}
               />
             </a>
           </div>
-          <div className="hidden sm:ml-6 sm:block">
-            <div className="flex space-x-4">{/* Add nav links here */}</div>
+          <div id="NavPages" className=" flex items-start justify-start text-white text-2xl pt-1">
+            <a href="localhost:3000/casino" className='pr-6 '>Casino</a>
+            <a href="localhost:3000/Live-Betting" className="pr-">Live Betting</a>
           </div>
         </div>
 
@@ -68,7 +47,7 @@ export default function NavBar( {onLoginClick} ) {
               <p>0.00</p>
             </button>
 
-            <button
+            <button onClick={onRegisterClick}
               type="button"
               id="registerBtn"
               className="bg-white hover:bg-gray-300 text-black font-bold py-2 px-4 rounded transition duration-300"
@@ -76,7 +55,7 @@ export default function NavBar( {onLoginClick} ) {
               Register
             </button>
 
-            <button  onClick={onLoginClick}
+            <button onClick={onLoginClick}
               type="button"
               id="loginBtn"
               className="bg-emerald-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"

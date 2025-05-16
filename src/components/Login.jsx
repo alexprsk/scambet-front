@@ -8,14 +8,16 @@ function Login({show, onClose}) {
   return (
     <div onClick={handleOverlayClick}
       id="loginModal"
-      className={`fixed ${show ? '' : 'hidden'} inset-0 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+      className={`fixed inset-0 bg-slate-900 bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
+  show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+}`}
     >
-      <div className="relative top-20 mx-auto p-5 border w-11/12 md:max-w-md shadow-lg rounded-md bg-white">
+      <div className="relative top-20 mx-auto p-5 border w-11/12 md:max-w-md shadow-lg rounded-md bg-gray-800 ">
         {/* Modal Content */}
         <div className="mt-3 text-center">
           {/* Header */}
           <div className="flex justify-between items-center pb-3">
-            <h3 className="text-xl font-bold text-gray-900">Login</h3>
+            <h3 className="text-xl font-bold text-white">Login</h3>
             <button 
               id="loginFormCloseBtn" 
               className="text-gray-400 hover:text-gray-600"
@@ -27,7 +29,7 @@ function Login({show, onClose}) {
           {/* Login Form */}
           <form id="loginForm" className="mt-4">
             <div className="mb-4">
-              <label htmlFor="loginUsername" className="block text-gray-700 text-sm font-bold mb-2 text-left">
+              <label htmlFor="loginUsername" className="block text-white text-sm font-bold mb-2 text-left">
                 Username:
               </label>
               <input
@@ -40,7 +42,7 @@ function Login({show, onClose}) {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="loginPassword" className="block text-gray-700 text-sm font-bold mb-2 text-left">
+              <label htmlFor="loginPassword" className="block text-white text-sm font-bold mb-2 text-left">
                 Password:
               </label>
               <input
