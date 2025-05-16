@@ -50,11 +50,12 @@ function App() {
                 ))}
           {/* BetSlip */}
 
-                <Betslip />
+               
               </div>
             </div>
           </div>
         </div>
+         <Betslip />
       </div>
     </>
   );
