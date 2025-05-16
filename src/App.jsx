@@ -7,38 +7,19 @@ import SideBarLeft from './components/SideBarLeft.jsx';
 import SideBarRight from './components/SideBarRight.jsx'
 import Carousel from './components/Carousel';
 import Betslip from './components/BetSlip';
-import Footer from './Footer.jsx';
+import Footer from './components/Footer.jsx';
 import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMarkets';
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
+import AuthWrapper from './components/AuthWrapper.jsx';
 
 function App() {
 
-  const [showLoginModal, setShowLoginModal] = useState(false);
-   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-
-  function handleLoginClick(){
-    setShowLoginModal(true);
-  };
-
-  function handleCloseLogin(){
-    setShowLoginModal(false);
-  };
-
-  const handleRegisterClick = () => {
-    setShowRegistrationModal(true)
-  };
-
-
-    const handleCloseRegistration = () => {
-    setShowRegistrationModal(false);
-  };
 
   return (
     <>
-      <NavBar onLoginClick={handleLoginClick} />
-      <Registration />
-      <Login show={showLoginModal} onClose={handleCloseLogin} />
+      <AuthWrapper/>
+      
       <div className="relative min-h-screen flex  ">
         <SideBarLeft />
         

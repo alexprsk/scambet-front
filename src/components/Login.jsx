@@ -1,9 +1,9 @@
 
-function Login({show, onClose}) {
+function Login({show, Hide}) {
   const handleOverlayClick = (e) => {
     // Close only if the click is on the overlay itself
     if (e.target.id === "loginModal") {
-      onClose();
+      Hide();
     }
   };
   return (
@@ -22,7 +22,7 @@ function Login({show, onClose}) {
             <button 
               id="loginFormCloseBtn" 
               className="text-gray-400 hover:text-gray-600"
-              onClick={onClose}>
+              onClick={Hide}>
               <span className="text-2xl">&times;</span>
             </button>
           </div>
@@ -56,7 +56,7 @@ function Login({show, onClose}) {
             </div>
 
             <div className="flex items-center justify-between">
-              <button
+              <button onClick={Hide}
                 type="submit"
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
               >

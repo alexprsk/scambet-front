@@ -1,8 +1,8 @@
-export default function Registration({show, onClose}) {
+export default function Registration({show, Hide}) {
   const handleOverlayClick = (e) => {
     // Close only if the click is on the overlay itself
     if (e.target.id === "registrationModal") {
-      onClose();
+      Hide();
     }
   };
   return (
@@ -18,7 +18,7 @@ export default function Registration({show, onClose}) {
           {/* Header */}
           <div className="flex justify-between items-center pb-3">
             <h3 className="text-xl font-bold text-white">Register</h3>
-            <button onClick={onClose} id="regFormCloseBtn" className="text-gray-400 hover:text-gray-600">
+            <button onClick={Hide} id="regFormCloseBtn" className="text-gray-400 hover:text-gray-600">
               <span className="text-2xl">&times;</span>
             </button>
           </div>

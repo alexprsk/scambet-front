@@ -1,6 +1,6 @@
 import ScambetLogo from '../assets/ScambetLogo1.png'
 
-export default function NavBar({ onLoginClick, onRegisterClick }) {
+export default function NavBar({ onLoginClick, onRegistrationClick }) {
   return (
     <nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
       <div className="relative flex h-16 items-center justify-between">
@@ -47,7 +47,7 @@ export default function NavBar({ onLoginClick, onRegisterClick }) {
               <p>0.00</p>
             </button>
 
-            <button onClick={onRegisterClick}
+            <button onClick={onRegistrationClick}
               type="button"
               id="registerBtn"
               className="bg-white hover:bg-gray-300 text-black font-bold py-2 px-4 rounded transition duration-300"
@@ -63,7 +63,7 @@ export default function NavBar({ onLoginClick, onRegisterClick }) {
               Login
             </button>
 
-            <button
+            <button 
               type="button"
               id="logoutBtn"
               className="hidden bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
