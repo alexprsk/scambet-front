@@ -22,6 +22,7 @@ export  function PreLiveMarketsTop() {
                   <span className="flex-1"><strong>2</strong></span>
                 </div>
               </div>
+              
             </div>        
     );
 }
@@ -32,7 +33,7 @@ export  function PreLiveMarketsTop() {
 
 export  function PreLiveMarkets(props) {
     return (
-    <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-1 cursor-pointer rounded-md transition">
+    <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
         <div className="event_timer flex  items-center justify-start pl-1 mr-1 text-white text-sm">{props.time}
         </div>
         <div className="event_teams flex flex-col flex-1  ml-1 pl-2 items-left justify-start">

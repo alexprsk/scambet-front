@@ -3,9 +3,11 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Registration from './components/Registration';
 import Login from './components/Login';
-import SideBar from './components/SideBar';
+import SideBarLeft from './components/SideBarLeft.jsx';
+import SideBarRight from './components/SideBarRight.jsx'
 import Carousel from './components/Carousel';
 import Betslip from './components/BetSlip';
+import Footer from './Footer.jsx';
 import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMarkets';
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
@@ -37,8 +39,9 @@ function App() {
       <NavBar onLoginClick={handleLoginClick} />
       <Registration />
       <Login show={showLoginModal} onClose={handleCloseLogin} />
-      <div className="relative min-h-screen flex ">
-        <SideBar />
+      <div className="relative min-h-screen flex  ">
+        <SideBarLeft />
+        
         <div className="flex-1 flex-col">
 
           {/* Carousel */}
@@ -50,7 +53,7 @@ function App() {
 
           {/* PreLive-Markets */}
           <div className="events_outside_container relative ">
-            <div className="events_container m-8 h-full flex flex-col  rounded-md z-10 border border-solid border-white">
+            <div className="events_container m-8 h-full flex flex-col rounded-md z-10 border border-solid border-white">
               <div className="events_card flex-1 flex-col rounded-md" id="events_card">
 
                 <PreLiveMarketsTop />
@@ -64,9 +67,13 @@ function App() {
               </div>
             </div>
           </div>
+          <Footer/>
         </div>
+         <SideBarRight />
          <Betslip />
+         
       </div>
+      
     </>
   );
 }
