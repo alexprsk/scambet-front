@@ -1,4 +1,4 @@
-import ScambetLogo from '../assets/ScambetLogo1.png'
+import ScambetLogo from '../../assets/ScambetLogo1.png'
 
 export default function NavBar({ onLoginClick, onRegistrationClick }) {
   return (

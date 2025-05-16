@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import NavBar from './components/NavBar';
-import Registration from './components/Registration';
-import Login from './components/Login';
 import SideBarLeft from './components/SideBarLeft.jsx';
 import SideBarRight from './components/SideBarRight.jsx'
 import Carousel from './components/Carousel';
@@ -11,7 +8,7 @@ import Footer from './components/Footer.jsx';
 import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMarkets';
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
-import AuthWrapper from './components/AuthWrapper.jsx';
+import AuthWrapper from './components/Auth/AuthWrapper.jsx';
 
 function App() {
 
