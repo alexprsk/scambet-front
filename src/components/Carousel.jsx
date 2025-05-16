@@ -1,10 +1,22 @@
 import MingPic from '../assets/ming.png'
+import ByePenis from '../assets/Byepenis.jpg'
+import CheckAnus from '../assets/checkanus.png'
+import FishAround from '../assets/fisharound.png'
+import SurfDog from '../assets/surfdog.png'
 
-export default function Carousel() {
-    return (
-        
-        <div className="flex-1 ml-3">
-          <img src= {MingPic} className="w-full h-full object-cover rounded-xl"></img>
-        </div>
-    );
+export const IMAGES = [
+  { src: MingPic },
+  { src: ByePenis },
+  { src: CheckAnus },
+  { src: FishAround },
+  { src: SurfDog }
+];
+
+export default function Carousel({src}) {
+  return (
+
+    <div className="flex-1 ml-3">
+      <img src={src} className="w-full h-full object-cover rounded-xl shrink-0 min-w-[230px]"></img>
+    </div>
+  );
 }
