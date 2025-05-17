@@ -1,6 +1,6 @@
 export default function SideBarRight() {
   return (
-    <div className="bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded">
+    <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
       <div className="top-16">
         <nav>
           <ul className="space-y-2">
@@ -31,6 +31,32 @@ export default function SideBarRight() {
               </a>
             </li>
             <li>
+              <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
+                  />
+                </svg>
+                Tennis
+              </a>
+            </li>
+                        <li>
+              <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
+                  />
+                </svg>
+                Tennis
+              </a>
+            </li>
+                        <li>
               <a href="#" className="flex items-center p-2 hover:bg-slate-500 rounded transition">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path

@@ -20,7 +20,7 @@ function App() {
         <SideBarLeft />        
         <div className="flex-1 flex-col">
           {/* Carousel */}
-          <div className="carousel_card m-8 h-56 flex flex-row rounded-xl">
+          <div className="carousel_card m-8 h-44 flex flex-row rounded-xl">
             {IMAGES.map((image, index) => (
               <Carousel key={index} {...image} />
             ))}
@@ -28,8 +28,8 @@ function App() {
 
           {/* PreLive-Markets */}
           <div className="events_outside_container relative flex">
-            <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10 border border-solid border-white">
-              <div className="events_card flex-1 flex-col rounded-md" id="events_card">
+            <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10 ">
+              <div className="events_card flex-1 flex-col rounded-md bg-gray-800 shadow-2xl" id="events_card">
                 <PreLiveMarketsTop />
                 {PRELIVE_MARKETS.map((market, index) => (
                   <PreLiveMarkets key={index} {...market} />
@@ -41,7 +41,7 @@ function App() {
           
           <Footer/>
         </div>
-        <SideBarRight />
+
          
          <Betslip />
       </div>
