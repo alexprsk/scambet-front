@@ -15,13 +15,10 @@ function App() {
 
   return (
     <>
-      <AuthWrapper/>
-      
+      <AuthWrapper/>      
       <div className="relative min-h-screen flex  ">
-        <SideBarLeft />
-        
+        <SideBarLeft />        
         <div className="flex-1 flex-col">
-
           {/* Carousel */}
           <div className="carousel_card m-8 h-56 flex flex-row rounded-xl">
             {IMAGES.map((image, index) => (
@@ -33,15 +30,11 @@ function App() {
           <div className="events_outside_container relative ">
             <div className="events_container m-8 h-full flex flex-col rounded-md z-10 border border-solid border-white">
               <div className="events_card flex-1 flex-col rounded-md" id="events_card">
-
                 <PreLiveMarketsTop />
-
                 {PRELIVE_MARKETS.map((market, index) => (
                   <PreLiveMarkets key={index} {...market} />
                 ))}
-          {/* BetSlip */}
 
-               
               </div>
             </div>
           </div>
@@ -49,9 +42,7 @@ function App() {
         </div>
          <SideBarRight />
          <Betslip />
-         
       </div>
-      
     </>
   );
 }
