@@ -15,13 +15,10 @@ function App() {
 
   return (
     <>
-      <AuthWrapper/>
-      
-      <div className="relative min-h-screen flex flex-row">
-        <SideBarLeft />
-        
-        <div className=" flex-1 flex-col">
-
+      <AuthWrapper/>      
+      <div className="relative min-h-screen flex  ">
+        <SideBarLeft />        
+        <div className="flex-1 flex-col">
           {/* Carousel */}
           <div className="carousel_card m-8 h-56 flex flex-row rounded-xl">
             {IMAGES.map((image, index) => (
@@ -44,7 +41,7 @@ function App() {
           
           <Footer/>
         </div>
-
+        <SideBarRight />
          
          <Betslip />
       </div>
