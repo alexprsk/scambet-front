@@ -13,12 +13,13 @@ function Login({show, Hide}) {
   show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
 }`}
     >
-      <div className="relative top-20 mx-auto p-5 border w-11/12 md:max-w-md shadow-lg rounded-md bg-gray-800 ">
+      <div className="relative top-12 ml-auto mr-5 border w-11/12 md:max-w-sm shadow-lg rounded-md bg-gray-800">
+
         {/* Modal Content */}
-        <div className="mt-3 text-center">
-          {/* Header */}
-          <div className="flex justify-between items-center pb-3">
-            <h3 className="text-xl font-bold text-white">Login</h3>
+        <div className="mt-3 mx-4 text-center">
+          {/* Header*/}
+          <div className="flex mx-4 mb-4 justify-between items-center ">
+            <h3 className="text-2xl font-bold text-white">Login</h3>
             <button 
               id="loginFormCloseBtn" 
               className="text-gray-400 hover:text-gray-600"
@@ -26,10 +27,11 @@ function Login({show, Hide}) {
               <span className="text-2xl">&times;</span>
             </button>
           </div>
+ 
 
           {/* Login Form */}
-          <form id="loginForm" className="mt-4">
-            <div className="mb-4">
+          <form id="loginForm" className=" mx-12">
+            <div className="mb-4 ">
               <label htmlFor="loginUsername" className="block text-white text-sm font-bold mb-2 text-left">
                 Username:
               </label>
@@ -38,7 +40,7 @@ function Login({show, Hide}) {
                 id="loginUsername"
                 name="loginUsername"
                 required
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
@@ -51,20 +53,20 @@ function Login({show, Hide}) {
                 id="loginPassword"
                 name="loginPassword"
                 required
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="flex items-center justify-between">
               <button onClick={Hide}
                 type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
               >
                 Login
               </button>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 ">
               <a href="/user/resetpassword" className="text-blue-500 hover:underline">
                 Forgot Password?
               </a>
