@@ -1,6 +1,6 @@
 export default function SideBarRight() {
   return (
-    <div className="min-w-80 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded">
+    <div className="bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded">
       <div className="top-16">
         <nav>
           <ul className="space-y-2">
