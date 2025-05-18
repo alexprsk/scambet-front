@@ -1,4 +1,12 @@
+import { useContext } from 'react';
+
+
+
+
 export default function BetSlip() {
+
+  
+
     return (
         <div className="fixed bottom-0 right-4 bg-gray-700 hover:bg-gray-500 rounded-sm shadow-lg  w-96  cursor-pointer text-emerald-300">
             <div className="flex flex-col justify-center items-center">

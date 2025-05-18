@@ -10,12 +10,14 @@ import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
 import AuthWrapper from './components/Auth/AuthWrapper.jsx';
 
+
 function App() {
 
 
   return (
     <>
-      <AuthWrapper/>      
+      <AuthWrapper/>
+  
       <div className="relative min-h-screen flex  ">
         <SideBarLeft />        
         <div className="flex-1 flex-col">
@@ -45,6 +47,7 @@ function App() {
          
          <Betslip />
       </div>
+
     </>
   );
 }
