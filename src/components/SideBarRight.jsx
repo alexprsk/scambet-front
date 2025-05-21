@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux'
+
 export default function SideBarRight() {
   return (
     <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">

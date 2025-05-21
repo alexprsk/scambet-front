@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export function PreLiveMarketsTop() {
   return (
@@ -31,64 +33,65 @@ export function PreLiveMarketsTop() {
 
 
 
-export function PreLiveMarkets(props) {
+export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
   const [selectedOption, setSelectedOption] = useState(null);
+  const dispatch = useDispatch();
 
-  function HandleClick(odd, selection, time) {
-    // If clicking the already selected option, deselect it
-    if (selectedOption === selection) {
-      setSelectedOption(null);
-    } else {
-      setSelectedOption(selection);
-    }
+  const selections = [
+    { label: '1', value: hometeam, odd: odds[0] },
+    { label: 'x', value: 'Draw', odd: odds[1] },
+    { label: '2', value: awayteam, odd: odds[2] }
+  ];
 
-    console.log(odd, selection, time);
-  }
+  const handleSelection = (selection) => {
+    const { value, odd } = selection;
+
+    setSelectedOption((prev) => (prev === value ? null : value));
+
+    const action = {
+      type: 'SELECT_MARKET',
+      payload: {
+        selectedEvent: {
+          hometeam,
+          awayteam,
+          time,
+        },
+        selectedMarket: {
+          hometeam,
+          odds: odd
+        }
+      }
+    };
+
+    dispatch(action);
+    console.log('Dispatched:', action.type, action.payload);
+  };
 
   return (
     <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
       <div className="event_timer flex items-center justify-start pl-1 mr-1 text-white text-sm">
-        {props.time}
+        {time}
       </div>
       <div className="event_teams flex flex-col flex-1 ml-1 pl-2 items-left justify-start">
-        <div className="event_teams_home_1 flex text-white text-sm" id="event_teams_home_1">
-          {props.hometeam}
+        <div className="event_teams_home_1 flex text-white text-sm">
+          {hometeam}
         </div>
-        <div className="event_teams_away_2 flex text-white text-sm" id="event_teams_away_2">
-          {props.awayteam}
+        <div className="event_teams_away_2 flex text-white text-sm">
+          {awayteam}
         </div>
       </div>
       <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-        <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
+        {selections.map((selection, index) => (
           <div
-            onClick={() => HandleClick(props.odds[0], props.hometeam, props.time)}
+            key={index}
+            onClick={() => handleSelection(selection)}
             role="button"
-            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === props.hometeam ? 'bg-gray-800' : 'bg-teal-300 bg-opacity-20'
+            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === selection.value ? 'bg-gray-800' : 'bg-teal-300 bg-opacity-20'
               } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
           >
-            {props.odds[0]}
+            {selection.odd}
           </div>
-        </div>
-        <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-          <div
-            onClick={() => HandleClick(props.odds[1], "Draw", props.time)}
-            role="button"
-            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === "Draw" ? 'bg-gray-800' : 'bg-teal-300 bg-opacity-20'
-              } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
-          >
-            {props.odds[1]}
-          </div>
-        </div>
-        <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-          <div
-            onClick={() => HandleClick(props.odds[2], props.awayteam, props.time)}
-            role="button"
-            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === props.awayteam ? 'bg-gray-800' : 'bg-teal-300 bg-opacity-20'
-              } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
-          >
-            {props.odds[2]}
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
