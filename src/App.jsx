@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import SideBarLeft from './components/SideBarLeft.jsx';
-import SideBarRight from './components/Betslip.jsx'
+
 import Carousel from './components/Carousel';
 import Betslip from './components/BetSlip';
 import Footer from './components/Footer.jsx';
