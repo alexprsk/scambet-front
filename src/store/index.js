@@ -1,11 +1,17 @@
 import {createStore } from 'redux'
 
-const initialState = {
+const BetslipState = {
   selectedEvent: null,
   selectedMarket: null,
 };
 
-const betslipReducer = (state = {initial: null}, action) => {
+const betslipReducer = (state = BetslipState, action) => {
+  if (action.type === "SELECT_MARKET"){
+    return {
+      selectedEvent: action.payload.selectedEvent,
+      selectedMarket: action.payload.selectedMarket
+    }
+  }
 
   
     return state;

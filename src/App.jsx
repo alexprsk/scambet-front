@@ -43,9 +43,6 @@ function App() {
           
           <Footer/>
         </div>
-
-         
-         <Betslip />
       </div>
 
     </>

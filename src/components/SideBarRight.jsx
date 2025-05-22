@@ -1,6 +1,28 @@
 import { useSelector } from 'react-redux'
 
+
+
 export default function SideBarRight() {
+
+  const { selectedEvent, selectedMarket } = useSelector((state) => state);
+
+  if (!selectedEvent  || !selectedMarket  ) {
+    return(
+    <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
+      
+      <div className="top-16">
+        <h2 className="text-xl font-bold mb-4 border-b border-gray-500 pb-2">Betslip</h2>
+        <h2 className="text-xl font-bold mb-4  pb-2">Your Betslip is empty :(</h2>
+
+
+
+      </div>
+    </div>)
+
+}
+
+
+
   return (
     <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
       
@@ -11,21 +33,13 @@ export default function SideBarRight() {
         <ul className="space-y-4">
           <li className="p-3 bg-gray-700 rounded-lg shadow flex flex-col">
             <div className="flex justify-between text-sm">
-              <span>Dortmund vs Wolfsburg</span>
+              <span>{selectedEvent.hometeam} vs {selectedEvent.awayteam}</span>
               <button className="text-red-400 hover:text-red-600">×</button>
             </div>
-            <div className="text-sm text-gray-300 mt-1">Match Winner: Dortmund</div>
-            <div className="text-sm text-lime-400 font-semibold mt-1">Odds: 1.85</div>
+            <div className="text-sm text-gray-300 mt-1">{selectedMarket.hometeam}</div>
+            <div className="text-sm text-lime-400 font-semibold mt-1">{selectedMarket.odds}</div>
           </li>
 
-          <li className="p-3 bg-gray-700 rounded-lg shadow flex flex-col">
-            <div className="flex justify-between text-sm">
-              <span>Arsenal vs Chelsea</span>
-              <button className="text-red-400 hover:text-red-600">×</button>
-            </div>
-            <div className="text-sm text-gray-300 mt-1">Total Goals Over 2.5</div>
-            <div className="text-sm text-lime-400 font-semibold mt-1">Odds: 2.10</div>
-          </li>
         </ul>
 
         {/* Stake Input */}

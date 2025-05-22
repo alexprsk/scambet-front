@@ -38,13 +38,13 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
   const dispatch = useDispatch();
 
   const selections = [
-    { label: '1', value: hometeam, odd: odds[0] },
-    { label: 'x', value: 'Draw', odd: odds[1] },
-    { label: '2', value: awayteam, odd: odds[2] }
+    { label: '1', value: hometeam, odd: odds[0], id: 12314 },
+    { label: 'x', value: 'Draw', odd: odds[1], id: 123143 },
+    { label: '2', value: awayteam, odd: odds[2], id: 12316 }
   ];
 
   const handleSelection = (selection) => {
-    const { value, odd } = selection;
+    const { value, odd, id } = selection;
 
     setSelectedOption((prev) => (prev === value ? null : value));
 
@@ -58,7 +58,8 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
         },
         selectedMarket: {
           hometeam,
-          odds: odd
+          odds: odd,
+          id: id
         }
       }
     };
