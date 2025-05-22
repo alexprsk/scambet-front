@@ -32,7 +32,6 @@ export function PreLiveMarketsTop() {
 
 
 
-
 export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
           time,
         },
         selectedMarket: {
-          hometeam,
+          value,
           odds: odd,
           id: id
         }

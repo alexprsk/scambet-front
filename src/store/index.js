@@ -1,4 +1,4 @@
-import {createStore } from 'redux'
+import { createStore } from 'redux'
 
 const BetslipState = {
   selectedEvent: null,
@@ -12,6 +12,13 @@ const betslipReducer = (state = BetslipState, action) => {
       selectedMarket: action.payload.selectedMarket
     }
   }
+    if (action.type === "DESELECT_MARKET"){
+    return {
+      selectedEvent: action.payload.selectedEvent,
+      selectedMarket: action.payload.selectedMarket
+    }
+  }
+
 
   
     return state;

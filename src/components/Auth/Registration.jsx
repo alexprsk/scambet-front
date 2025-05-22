@@ -5,6 +5,12 @@ export default function Registration({show, Hide}) {
       Hide();
     }
   };
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    Hide();
+    };
+
   return (
     <div onClick={handleOverlayClick}
       id="registrationModal"
@@ -24,7 +30,7 @@ export default function Registration({show, Hide}) {
           </div>
 
           {/* Registration Form */}
-          <form id="registrationForm" className="mt-4">
+          <form  onSubmit={handleSubmit} id="registrationForm" className="mt-4">
             <div className="mb-4">
               <label htmlFor="registrationUsername" className="block text-white text-sm font-bold mb-2 text-left">
                 Username:
@@ -99,7 +105,7 @@ export default function Registration({show, Hide}) {
                 id="registrationPassword"
                 name="registrationPassword"
                 required
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
