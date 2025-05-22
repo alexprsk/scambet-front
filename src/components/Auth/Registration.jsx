@@ -14,8 +14,8 @@ export default function Registration({show, Hide}) {
   return (
     <div onClick={handleOverlayClick}
       id="registrationModal"
-            className={`fixed inset-0 bg-slate-900 bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
-  show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            className={`fixed inset-0 bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
+  show ? ' pointer-events-auto' : 'opacity-0 pointer-events-none'
 }`}
     >
       <div className="relative top-20 mx-auto p-5 border w-11/12 md:max-w-md shadow-lg rounded-md bg-gray-800">
@@ -25,7 +25,7 @@ export default function Registration({show, Hide}) {
           <div className="flex justify-between items-center pb-3">
             <h3 className="text-xl font-bold text-white">Register</h3>
             <button onClick={Hide} id="regFormCloseBtn" className="text-gray-400 hover:text-gray-600">
-              <span className="text-2xl">&times;</span>
+              <span className="text-2xl cursor-pointer">&times;</span>
             </button>
           </div>
 
@@ -105,14 +105,14 @@ export default function Registration({show, Hide}) {
                 id="registrationPassword"
                 name="registrationPassword"
                 required
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
               >
                 Register
               </button>

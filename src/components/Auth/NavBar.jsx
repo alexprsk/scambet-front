@@ -42,7 +42,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
       <button
         type="button"
         id="userAuthenticatedBalance"
-        className="hidden bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300"
+        className="hidden bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer"
       >
         <p>0.00</p>
       </button>
@@ -51,7 +51,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
   onClick={onRegistrationClick}
   type="button"
   id="registerBtn"
-  className="text-sm px-4 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition duration-200"
+  className="text-sm px-4 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition duration-200 cursor-pointer"
 >
   Register
 </button>
@@ -60,7 +60,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
   onClick={onLoginClick}
   type="button"
   id="loginBtn"
-  className="text-sm px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 transition duration-200"
+  className="text-sm px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 transition duration-200 cursor-pointer"
 >
   Login
 </button>
@@ -68,7 +68,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
 <button
   type="button"
   id="logoutBtn"
-  className="hidden text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200"
+  className="hidden text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200 cursor-pointer"
 >
   Logout
 </button>

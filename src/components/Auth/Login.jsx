@@ -25,13 +25,13 @@ function Login({ show, Hide }) {
   };
 
   return (
-    <div 
-      onClick={handleOverlayClick}
-      id="loginModal"
-      className={`fixed inset-0 bg-slate-900 bg-opacity-70 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
-        show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}
-    >
+<div 
+  onClick={handleOverlayClick}
+  id="loginModal"
+  className={`fixed inset-0  overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
+    show ? 'bg-opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
+  }`}
+>
       <div className="relative top-12 ml-auto mr-5 border w-11/12 md:max-w-sm shadow-lg rounded-md bg-gray-800">
         {/* Modal Content */}
         <div className="mt-3 mx-4 text-center">
@@ -43,7 +43,7 @@ function Login({ show, Hide }) {
               className="text-gray-400 hover:text-gray-600"
               onClick={Hide}
             >
-              <span className="text-2xl">&times;</span>
+              <span className="text-2xl cursor-pointer">&times;</span>
             </button>
           </div>
  
@@ -82,14 +82,14 @@ function Login({ show, Hide }) {
             <div className="flex items-center justify-between">
               <button
                 type="submit"  // Changed from onClick to type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
               >
                 Login
               </button>
             </div>
 
             <div className="mt-4">
-              <a href="/user/resetpassword" className="text-blue-500 hover:underline">
+              <a href="/user/resetpassword" className="text-blue-500 hover:underline cursor-pointer">
                 Forgot Password?
               </a>
             </div>

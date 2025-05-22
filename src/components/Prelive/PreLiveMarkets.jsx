@@ -86,8 +86,8 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
             key={index}
             onClick={() => handleSelection(selection)}
             role="button"
-            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === selection.value ? 'bg-gray-800' : 'bg-teal-300 bg-opacity-20'
-              } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
+            className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === selection.value ? 'bg-emerald-800' : 'bg-gray-800 bg-opacity-20'
+              } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:hover:bg-emerald-800 dark:hover:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
           >
             {selection.odd}
           </div>

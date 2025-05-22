@@ -48,7 +48,7 @@ export default function SideBarRight() {
           <li className="p-3 bg-gray-700 rounded-lg shadow flex flex-col">
             <div className="flex justify-between text-sm">
               <span>{selectedEvent.hometeam} vs {selectedEvent.awayteam}</span>
-              <button onClick={deselectMarket} className="text-red-400 hover:text-red-600">×</button>
+              <button onClick={deselectMarket} className="text-red-400 hover:text-red-600 cursor-pointer">×</button>
             </div>
             <div className="text-sm text-gray-300 mt-1">{selectedMarket.value}</div>
             <div className="text-sm text-lime-400 font-semibold mt-1">{selectedMarket.odds}</div>
@@ -84,7 +84,7 @@ export default function SideBarRight() {
         {/* Place Bet Button */}
         <button
           type="button"
-          className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200"
+          className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 cursor-pointer"
         >
           Place Bet
         </button>
