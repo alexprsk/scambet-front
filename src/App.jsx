@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import SideBarLeft from './components/SideBarLeft.jsx';
+import './index.css'
 
 import Carousel from './components/Carousel';
 import Betslip from './components/BetSlip';
