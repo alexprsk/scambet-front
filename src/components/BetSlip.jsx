@@ -2,58 +2,76 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react';
 
 
-export default function SideBarRight() {
+export default function Betslip() {
   const dispatch = useDispatch();
-  const { selectedEvent, selectedMarket } = useSelector((state) => state);
   const [stake, setStake] = useState('');
-
-  const deselectMarket = () => {
-    const action = {
-      type: 'DESELECT_MARKET',
-      payload: {
-        selectedEvent: null,
-        selectedMarket: null
-      }
-
-  }
-  dispatch(action);
-}
+  const { selections } = useSelector((state) => state);
 
   const calculatePotentialReturn = () => {
+    if (!stake || selections.length === 0) return 0;
 
-    if (!stake || !selectedMarket) return 0;
-    return ((stake *selectedMarket.odds)).toFixed(2);
+    const totalOdds = selections.reduce(
+      (acc, selection) => acc * selection.selectedMarket.odds,
+      1
+    );
 
-  }
+    return (stake * totalOdds).toFixed(2);
+  };
 
+  const calculateTotalOdds = () => {
+    if (selections.length === 0) return 0;
+    return selections.reduce(
+      (acc, selection) => acc * selection.selectedMarket.odds,
+      1
+    ).toFixed(2);
+  };
 
-  if (!selectedEvent  || !selectedMarket  ) {
-    return(
-    <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
-      <div className="top-16">
-        <h2 className="text-xl font-bold mb-4 border-b border-gray-500 pb-2">Betslip</h2>
-        <h2 className="text-xl font-bold mb-4  pb-2">Your Betslip is empty :(</h2>
+  if (selections.length === 0) {
+    return (
+      <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
+        <div className="top-16">
+          <h2 className="text-xl font-bold mb-4 border-b border-gray-500 pb-2">Betslip</h2>
+          <h2 className="text-xl font-bold mb-4 pb-2">Your Betslip is empty :(</h2>
+        </div>
       </div>
-    </div>)
-}
+    );
+  }
 
   return (
     <div className="w-80 mt-8 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded-xl">
-      
       <div className="top-16">
         <h2 className="text-xl font-bold mb-4 border-b border-gray-500 pb-2">Betslip</h2>
 
         {/* Selected Bets */}
         <ul className="space-y-4">
-          <li className="p-3 bg-gray-700 rounded-lg shadow flex flex-col">
-            <div className="flex justify-between text-sm">
-              <span>{selectedEvent.hometeam} vs {selectedEvent.awayteam}</span>
-              <button onClick={deselectMarket} className="text-red-400 hover:text-red-600 cursor-pointer">×</button>
-            </div>
-            <div className="text-sm text-gray-300 mt-1">{selectedMarket.value}</div>
-            <div className="text-sm text-lime-400 font-semibold mt-1">{selectedMarket.odds}</div>
-          </li>
-
+          {selections.map((selection, index) => (
+            <li key={index} className="p-2 bg-gray-800 rounded">
+              <div className="flex justify-between">
+                <span>{selection.selectedEvent.hometeam} vs {selection.selectedEvent.awayteam}</span>
+                <button
+                  onClick={() => dispatch({
+                    type: 'DESELECT_MARKET',
+                    payload: {
+                      hometeam: selection.selectedEvent.hometeam,
+                      awayteam: selection.selectedEvent.awayteam,
+                      label: selection.selectedMarket.label
+                    }
+                  })}
+                  className="text-red-400 hover:text-red-600"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="mt-1">
+                <span className="text-gray-400">Selection: </span>
+                <span>{selection.selectedMarket.value}</span>
+              </div>
+              <div>
+                <span className="text-gray-400">Odds: </span>
+                <span className="text-lime-400">{selection.selectedMarket.odds}</span>
+              </div>
+            </li>
+          ))}
         </ul>
 
         {/* Stake Input */}
@@ -73,7 +91,7 @@ export default function SideBarRight() {
         <div className="mt-4 text-sm space-y-1">
           <div className="flex justify-between">
             <span>Total Odds</span>
-            <span className="text-lime-400 font-semibold">{selectedMarket.odds}</span>
+            <span className="text-lime-400 font-semibold">{calculateTotalOdds()}</span>
           </div>
           <div className="flex justify-between">
             <span>Potential Return</span>
