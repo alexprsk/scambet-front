@@ -6,13 +6,14 @@ export default function BetslipView({
   setStake,
   selections,
   totalOdds,
-  potentialReturn
+  potentialReturn,
+
 }) {
   const dispatch = useDispatch();
 
   if (!selections || selections.length === 0) {
     return (
-      <div className="w-80 bg-inherit text-white rounded-xl">
+      <div className={`w-80 bg-inherit text-white rounded-xl `}>
         <div className="top-16 ">
           <h2 className="text-xl font-bold mb-4 pb-2">Your Betslip is empty :(</h2>
         </div>

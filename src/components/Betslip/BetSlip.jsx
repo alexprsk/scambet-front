@@ -7,7 +7,7 @@ export default function Betslip() {
   const dispatch = useDispatch();
   const [stake, setStake] = useState('');
   const { selections } = useSelector((state) => state);
-  const [selectedBetslip, setSelectedBetslip] = useState("")
+  const [selectedBetslip, setSelectedBetslip] = useState(true)
 
   const calculatePotentialReturn = () => {
     if (!stake || selections.length === 0) return 0;
@@ -28,28 +28,25 @@ export default function Betslip() {
     ).toFixed(2);
   };
 
-  const Handleclick = () => {
-    setClassName('hidden')
-  }
 
   return (
     <div className="w-80 mt-8 bg-inherit text-white m-4 p-4 hidden md:block border border-gray-500  rounded-xl">
       <div className='flex-row flex'>
-      <button className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 cursor-pointer rounded-tl-xl">Betslip</button>
-        <button className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2 cursor-pointer rounded-tr-xl">Open Bets</button>
-        </div>
+        <button onClick={() => setSelectedBetslip(true)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 cursor-pointer rounded-tl-xl">Betslip</button>
+        <button onClick={() => setSelectedBetslip(false)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2 cursor-pointer rounded-tr-xl">Open Bets</button>
+      </div>
       <div className="top-16">
 
-        <BetslipView 
+        {selectedBetslip ? <BetslipView
           stake={stake}
           setStake={setStake}
           potentialReturn={calculatePotentialReturn()}
           totalOdds={calculateTotalOdds()}
-          selections={selections} />
+          selections={selections} /> :
 
-          <BetslipOpenBets selections={selections}>
+          <BetslipOpenBets selections={selections} />
 
-          </BetslipOpenBets>
+        }
       </div>
     </div>
   )
