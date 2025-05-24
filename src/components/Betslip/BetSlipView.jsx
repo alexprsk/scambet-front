@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function BetslipView({
   stake,
@@ -10,6 +10,35 @@ export default function BetslipView({
 
 }) {
   const dispatch = useDispatch();
+  const [error, setError] = useState();
+  const [placedBet, setPlacedBet] = useState([]);
+
+
+    useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:8000/auth/');
+        const resData = await response.json()
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data")
+        }
+        setPlacedBet(resData.selectedMarket)
+      } catch (error) {
+        setError({
+          message: error.message || "Could not fetch users"
+        })
+      }
+    }
+    fetchUsers();
+  }, [selections]);
+
+
+  const handlePlaceBet = () => {
+    console.log(selections)
+    return selections
+
+  };
 
   if (!selections || selections.length === 0) {
     return (
@@ -20,6 +49,9 @@ export default function BetslipView({
       </div>
     );
   }
+
+
+
 
   return (
     <div className="w-80 rounded-xl">
@@ -89,7 +121,7 @@ export default function BetslipView({
         </div>
 
         {/* Place Bet Button */}
-        <button
+        <button onClick={() => handlePlaceBet(selections)}
           type="button"
           className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 cursor-pointer"
         >

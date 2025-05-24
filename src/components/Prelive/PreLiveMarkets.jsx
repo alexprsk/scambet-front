@@ -7,7 +7,7 @@ export function PreLiveMarketsTop() {
     <div className="events_Type flex-row flex bg-inherit rounded h-8 mb-2">
       <div className="text_svg flex-1 flex">
         <p className="text-white rounded-md flex ml-1"><strong>Pre-Live Markets</strong></p>
-        <svg className="w-[19px] h-[19px] fill-[#8e8e8e]" viewBox="0 0 512 512"
+        <svg className="animate-pulse  w-[19px] h-[19px] fill-[#8e8e8e]" viewBox="0 0 512 512"
           xmlns="http://www.w3.org/2000/svg">
 
 

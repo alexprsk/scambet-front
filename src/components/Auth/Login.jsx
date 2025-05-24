@@ -7,49 +7,48 @@ function Login({ show, Hide }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    
+    e.preventDefault();
+
     // Get form data
     const formData = new FormData(e.target);
     const username = formData.get('loginUsername');
     const password = formData.get('loginPassword');
-    
+
     // Here you would typically:
     // 1. Validate inputs
     // 2. Send to authentication API
     // 3. Handle response
     console.log('Login attempt:', { username, password });
-    
+
     // For now, just close the modal
     Hide();
   };
 
   return (
-<div 
-  onClick={handleOverlayClick}
-  id="loginModal"
-  className={`fixed inset-0  overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${
-    show ? 'bg-opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
-  }`}
->
+    <div
+      onClick={handleOverlayClick}
+      id="loginModal"
+      className={`fixed inset-0  overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ${show ? 'bg-opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+    >
       <div className="relative top-12 ml-auto mr-5 border w-11/12 md:max-w-sm shadow-lg rounded-md bg-gray-800">
         {/* Modal Content */}
         <div className="mt-3 mx-4 text-center">
           {/* Header*/}
           <div className="flex mx-4 mb-4 justify-between items-center">
             <h3 className="text-2xl font-bold text-white">Login</h3>
-            <button 
-              id="loginFormCloseBtn" 
+            <button
+              id="loginFormCloseBtn"
               className="text-gray-400 hover:text-gray-600"
               onClick={Hide}
             >
               <span className="text-2xl cursor-pointer">&times;</span>
             </button>
           </div>
- 
+
           {/* Login Form */}
-          <form 
-            id="loginForm" 
+          <form
+            id="loginForm"
             className="mx-12"
             onSubmit={handleSubmit}  // Added onSubmit handler
           >
