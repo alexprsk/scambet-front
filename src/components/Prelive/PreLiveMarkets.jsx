@@ -33,7 +33,7 @@ export function PreLiveMarketsTop() {
 
 
 export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
-  const [selectedOption, setSelectedOption] = useState(null);
+
   const dispatch = useDispatch();
   const selections = useSelector((state) => state.selections);
 
@@ -47,68 +47,66 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
   const handleSelection = (selection) => {
     const { label, value, odd, id } = selection;
 
-    const isSelected = selections.some(
-      sel =>
-        sel.selectedEvent.hometeam === hometeam &&
-        sel.selectedEvent.awayteam === awayteam &&
-        sel.selectedMarket.label === label
-    );
-  if (!isSelected) {
-    setSelectedOption(value);
-  }
-
-  if (isSelected) {
-    setSelectedOption(null);
-  };
 
 
-  const action = {
-    type: 'SELECT_MARKET',
-    payload: {
-      selectedEvent: {
-        hometeam,
-        awayteam,
-        time,
-      },
-      selectedMarket: {
-        label,
-        value,
-        odds: odd,
-        id
+
+    const action = {
+      type: 'SELECT_MARKET',
+      payload: {
+        selectedEvent: {
+          hometeam,
+          awayteam,
+          time,
+        },
+        selectedMarket: {
+          label,
+          value,
+          odds: odd,
+          id
+        }
       }
-    }
+    };
+
+    dispatch(action);
   };
 
-  dispatch(action);
-};
-
-return (
-  <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
-    <div className="event_timer flex items-center justify-start pl-1 mr-1 text-white text-sm">
-      {time}
-    </div>
-    <div className="event_teams flex flex-col flex-1 ml-1 pl-2 items-left justify-start">
-      <div className="event_teams_home_1 flex text-white text-sm">
-        {hometeam}
+  return (
+    <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
+      <div className="event_timer flex items-center justify-start pl-1 mr-1 text-white text-sm">
+        {time}
       </div>
-      <div className="event_teams_away_2 flex text-white text-sm">
-        {awayteam}
-      </div>
-    </div>
-    <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
-
-      {marketselections.map((selection, index) => (
-        <div
-          key={index}
-          onClick={() => handleSelection(selection)}
-          role="button"
-          className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${selectedOption === selection.value ? 'bg-emerald-800 dark:hover:bg-emerald-800' : 'bg-gray-800 bg-opacity-20 dark:hover:bg-gray-700 dark:hover:border-gray-600'
-            } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600  dark:focus:ring-gray-700 text-nowrap transition`}
-        >
-          {selection.odd}
+      <div className="event_teams flex flex-col flex-1 ml-1 pl-2 items-left justify-start">
+        <div className="event_teams_home_1 flex text-white text-sm">
+          {hometeam}
         </div>
-      ))}
+        <div className="event_teams_away_2 flex text-white text-sm">
+          {awayteam}
+        </div>
+      </div>
+      <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
+        {marketselections.map((selection, index) => {
+          const isSelected = selections.some(
+            sel =>
+              sel.selectedEvent.hometeam === hometeam &&
+              sel.selectedEvent.awayteam === awayteam &&
+              sel.selectedMarket.label === selection.label
+          );
+
+          return (
+            <div
+              key={index}
+              onClick={() => handleSelection(selection)}
+              role="button"
+              className={`event_markets_selections_1x2 w-16 h-10 m-1 text-center text-gray-900 ${isSelected
+                  ? 'bg-emerald-800 dark:hover:bg-emerald-800'
+                  : 'bg-gray-800 bg-opacity-20 dark:hover:bg-gray-700 dark:hover:border-gray-600'
+                } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:text-white dark:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
+            >
+              {selection.odd}
+            </div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
 }
