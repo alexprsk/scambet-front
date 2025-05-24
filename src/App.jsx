@@ -4,12 +4,13 @@ import SideBarLeft from './components/SideBarLeft.jsx';
 import './index.css'
 
 import Carousel from './components/Carousel';
-import Betslip from './components/BetSlip';
+import Betslip from './components/Betslip/BetSlip.jsx'
 import Footer from './components/Footer.jsx';
 import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMarkets';
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
 import AuthWrapper from './components/Auth/AuthWrapper.jsx';
+import BetslipView from './components/Betslip/BetSlipView.jsx'
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
               </div>
             </div><Betslip />
           </div>
-          
+
           <Footer/>
         </div>
       </div>
