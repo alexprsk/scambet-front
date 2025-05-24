@@ -7,6 +7,7 @@ export default function Betslip() {
   const dispatch = useDispatch();
   const [stake, setStake] = useState('');
   const { selections } = useSelector((state) => state);
+  const [selectedBetslip, setSelectedBetslip] = useState("")
 
   const calculatePotentialReturn = () => {
     if (!stake || selections.length === 0) return 0;
@@ -26,6 +27,10 @@ export default function Betslip() {
       1
     ).toFixed(2);
   };
+
+  const Handleclick = () => {
+    setClassName('hidden')
+  }
 
   return (
     <div className="w-80 mt-8 bg-inherit text-white m-4 p-4 hidden md:block border border-gray-500  rounded-xl">
