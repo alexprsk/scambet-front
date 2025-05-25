@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react';
+import { PlaceBet } from "./http.js"
 
 export default function BetslipView({
   stake,
@@ -13,6 +14,7 @@ export default function BetslipView({
   const [error, setError] = useState();
   const [placedBet, setPlacedBet] = useState([]);
 
+  
 
     useEffect(() => {
     async function fetchUsers() {
@@ -34,9 +36,13 @@ export default function BetslipView({
   }, [selections]);
 
 
-  const handlePlaceBet = () => {
-    console.log(selections)
-    return selections
+  const handlePlaceBet = (selections, stake) => {
+
+    console.log({selections, "stake" : stake})
+    PlaceBet(selections, stake);
+    return selections, stake
+
+    
 
   };
 
@@ -70,7 +76,7 @@ export default function BetslipView({
                     payload: {
                       hometeam: selection.selectedEvent.hometeam,
                       awayteam: selection.selectedEvent.awayteam,
-                      label: selection.selectedMarket.label
+                      label: selection.selectedMarket.label,
                     }
                   })}
                   className="text-red-400 hover:text-red-600"
@@ -101,6 +107,8 @@ export default function BetslipView({
           <input
             id="stake"
             type="number"
+            min = "0"
+            step = "0.1"
             value={stake}
             onChange={(e) => setStake(e.target.value)}
             placeholder="Enter stake"
@@ -121,7 +129,7 @@ export default function BetslipView({
         </div>
 
         {/* Place Bet Button */}
-        <button onClick={() => handlePlaceBet(selections)}
+        <button onClick={() => handlePlaceBet(selections, stake)}
           type="button"
           className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 cursor-pointer"
         >
