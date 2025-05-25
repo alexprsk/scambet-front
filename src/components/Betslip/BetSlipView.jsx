@@ -35,22 +35,32 @@ export default function BetslipView({
     fetchUsers();
   }, [selections]);
 
+  const hasDuplicates = selections.some((item, index, array) =>
+    item.selectedMarket.betTypeId === 12314 &&
+    array.findIndex(obj =>
+      obj.selectedMarket.betTypeId === item.selectedMarket.betTypeId &&
+      obj.selectedEvent.hometeam === item.selectedEvent.hometeam &&
+      obj.selectedEvent.awayteam === item.selectedEvent.awayteam
+    ) !== index
+  );
 
   const handlePlaceBet = (selections, stake) => {
 
-    console.log({selections, "stake" : stake})
+    console.log( hasDuplicates,{selections, "stake" : stake})
     PlaceBet(selections, stake);
-    return selections, stake
-
     
-
+    return selections, stake
   };
+
+
+
+
 
   if (!selections || selections.length === 0) {
     return (
       <div className={`w-80 bg-inherit text-white rounded-xl `}>
         <div className="top-16 ">
-          <h2 className="text-xl font-bold mb-4 pb-2">Your Betslip is empty :(</h2>
+          <h2 className="font-bold mb-4 pb-2 text-l ">Your Betslip is empty :(</h2>
         </div>
       </div>
     );
@@ -60,14 +70,14 @@ export default function BetslipView({
 
 
   return (
-    <div className="w-80 rounded-xl">
+    <div className="w-80 rounded-xl text-sm">
       <div className="top-16 pr-6">
 
 
         {/* Selected Bets */}
         <ul className="space-y-4">
           {selections.map((selection, index) => (
-            <li key={index} className="p-2 bg-gray-800 rounded">
+            <li key={index} className="p-2 bg-gray-800 rounded text-sm">
               <div className="flex justify-between">
                 <span>{selection.selectedEvent.hometeam} vs {selection.selectedEvent.awayteam}</span>
                 <button
@@ -90,11 +100,9 @@ export default function BetslipView({
                 </button>
               </div>
               <div className="mt-1">
-                <span className="text-gray-400">Selection: </span>
                 <span>{selection.selectedMarket.value}</span>
-              </div>
-              <div>
-                <span className="text-gray-400">Odds: </span>
+
+                <span className="text-gray-400"> @ </span>
                 <span className="text-lime-400">{selection.selectedMarket.odds}</span>
               </div>
             </li>
@@ -103,7 +111,7 @@ export default function BetslipView({
 
         {/* Stake Input */}
         <div className="mt-6">
-          <label htmlFor="stake" className="block text-sm text-gray-300 mb-1">Stake</label>
+
           <input
             id="stake"
             type="number"
@@ -129,9 +137,10 @@ export default function BetslipView({
         </div>
 
         {/* Place Bet Button */}
-        <button onClick={() => handlePlaceBet(selections, stake)}
+        {hasDuplicates? <span className='mt-4 block text-sm text-red-600'>Incompatible Selections</span>: <span></span>}
+        <button disabled={hasDuplicates} onClick={() => handlePlaceBet(selections, stake)}
           type="button"
-          className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 cursor-pointer"
+          className={`mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates? "opacity-50 cursor-not-allowed": "cursor-pointer"}`}
         >
           Place Bet
         </button>

@@ -39,13 +39,13 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
 
 
   const marketselections = [
-    { label: '1', value: hometeam, odd: odds[0], id: 12314 },
-    { label: 'x', value: 'Draw', odd: odds[1], id: 123143 },
-    { label: '2', value: awayteam, odd: odds[2], id: 12316 }
+    { label: '1', value: hometeam, odd: odds[0], betTypeId: 12314 },
+    { label: 'x', value: 'Draw', odd: odds[1], betTypeId: 12314 },
+    { label: '2', value: awayteam, odd: odds[2], betTypeId: 12314 }
   ];
 
   const handleSelection = (selection) => {
-    const { label, value, odd, id } = selection;
+    const { label, value, odd, betTypeId } = selection;
 
 
 
@@ -62,7 +62,7 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
           label,
           value,
           odds: odd,
-          id
+          betTypeId
         }
       }
     };
