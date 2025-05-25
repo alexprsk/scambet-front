@@ -119,7 +119,7 @@ export default function BetslipView({
             step="0.1"
             value={stake}
             onChange={(e) => setStake(e.target.value)}
-            placeholder="Enter stake"
+            placeholder="Bet"
             className="w-20 bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-lime-400"
           />
         </div>
