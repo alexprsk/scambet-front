@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { PlaceBet } from "./http.js"
 
 export default function BetslipView({
   stake,
@@ -10,6 +11,40 @@ export default function BetslipView({
 
 }) {
   const dispatch = useDispatch();
+  const [error, setError] = useState();
+  const [placedBet, setPlacedBet] = useState([]);
+
+  
+
+    useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:8000/auth/');
+        const resData = await response.json()
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data")
+        }
+        setPlacedBet(resData.selectedMarket)
+      } catch (error) {
+        setError({
+          message: error.message || "Could not fetch users"
+        })
+      }
+    }
+    fetchUsers();
+  }, [selections]);
+
+
+  const handlePlaceBet = (selections, stake) => {
+
+    console.log({selections, "stake" : stake})
+    PlaceBet(selections, stake);
+    return selections, stake
+
+    
+
+  };
 
   if (!selections || selections.length === 0) {
     return (
@@ -21,9 +56,12 @@ export default function BetslipView({
     );
   }
 
+
+
+
   return (
     <div className="w-80 rounded-xl">
-      <div className="top-16 pr-8">
+      <div className="top-16 pr-6">
 
 
         {/* Selected Bets */}
@@ -38,7 +76,7 @@ export default function BetslipView({
                     payload: {
                       hometeam: selection.selectedEvent.hometeam,
                       awayteam: selection.selectedEvent.awayteam,
-                      label: selection.selectedMarket.label
+                      label: selection.selectedMarket.label,
                     }
                   })}
                   className="text-red-400 hover:text-red-600"
@@ -69,6 +107,8 @@ export default function BetslipView({
           <input
             id="stake"
             type="number"
+            min = "0"
+            step = "0.1"
             value={stake}
             onChange={(e) => setStake(e.target.value)}
             placeholder="Enter stake"
@@ -89,7 +129,7 @@ export default function BetslipView({
         </div>
 
         {/* Place Bet Button */}
-        <button
+        <button onClick={() => handlePlaceBet(selections, stake)}
           type="button"
           className="mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 cursor-pointer"
         >
