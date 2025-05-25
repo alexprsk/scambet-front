@@ -3,6 +3,7 @@ import { useState } from 'react';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
 
+
 export default function Betslip() {
   const dispatch = useDispatch();
   const [stake, setStake] = useState('');
@@ -46,7 +47,9 @@ export default function Betslip() {
 
           <BetslipOpenBets selections={selections} />
 
+
         }
+
       </div>
     </div>
   )

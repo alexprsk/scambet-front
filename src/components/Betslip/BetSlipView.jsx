@@ -14,9 +14,9 @@ export default function BetslipView({
   const [error, setError] = useState();
   const [placedBet, setPlacedBet] = useState([]);
 
-  
 
-    useEffect(() => {
+
+  useEffect(() => {
     async function fetchUsers() {
       try {
         const response = await fetch('http://localhost:8000/auth/');
@@ -46,9 +46,9 @@ export default function BetslipView({
 
   const handlePlaceBet = (selections, stake) => {
 
-    console.log( hasDuplicates,{selections, "stake" : stake})
+    console.log(hasDuplicates, { selections, "stake": stake })
     PlaceBet(selections, stake);
-    
+
     return selections, stake
   };
 
@@ -70,15 +70,15 @@ export default function BetslipView({
 
 
   return (
-    <div className="w-80 rounded-xl text-sm">
-      <div className="top-16 pr-6">
+    <div className="w-80 rounded-xl text-sm ">
+      <div className="top-16 pr-6 ">
 
 
         {/* Selected Bets */}
-        <ul className="space-y-4">
+        <ul className="space-y-4 ">
           {selections.map((selection, index) => (
             <li key={index} className="p-2 bg-gray-800 rounded text-sm">
-              <div className="flex justify-between">
+              <div className="flex justify-between ">
                 <span>{selection.selectedEvent.hometeam} vs {selection.selectedEvent.awayteam}</span>
                 <button
                   onClick={() => dispatch({
@@ -110,39 +110,33 @@ export default function BetslipView({
         </ul>
 
         {/* Stake Input */}
-        <div className="mt-6">
+        <div className="mt-6 flex justify-end ">
 
           <input
             id="stake"
             type="number"
-            min = "0"
-            step = "0.1"
+            min="0"
+            step="0.1"
             value={stake}
             onChange={(e) => setStake(e.target.value)}
             placeholder="Enter stake"
-            className="w-full bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-lime-400"
+            className="w-20 bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-lime-400"
           />
         </div>
 
         {/* Totals */}
-        <div className="mt-4 text-sm space-y-1">
-          <div className="flex justify-between">
-            <span>Total Odds</span>
-            <span className="text-lime-400 font-semibold">{totalOdds}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Potential Return</span>
-            <span className="text-lime-400 font-semibold">{potentialReturn}</span>
-          </div>
-        </div>
+
 
         {/* Place Bet Button */}
-        {hasDuplicates? <span className='mt-4 block text-sm text-red-600'>Incompatible Selections</span>: <span></span>}
+        {hasDuplicates ? <span className='mt-4 block text-sm text-red-600'>Incompatible Selections</span> : <span></span>}
         <button disabled={hasDuplicates} onClick={() => handlePlaceBet(selections, stake)}
           type="button"
-          className={`mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates? "opacity-50 cursor-not-allowed": "cursor-pointer"}`}
+          className={`mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
         >
-          Place Bet
+          <div className="flex flex-col items-center leading-tight">
+            <span className='font-bold text-md'>Place Bet {stake}</span>
+            <span className="text-sm text-black/80">Return {potentialReturn}</span>
+          </div>
         </button>
       </div>
     </div>
