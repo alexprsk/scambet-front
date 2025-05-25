@@ -61,7 +61,7 @@ export default function BetslipView({
 
   return (
     <div className="w-80 rounded-xl">
-      <div className="top-16 pr-8">
+      <div className="top-16 pr-6">
 
 
         {/* Selected Bets */}
