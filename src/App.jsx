@@ -10,7 +10,7 @@ import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveM
 import { PRELIVE_MARKETS } from './components/Prelive/DummyData.js';
 import { IMAGES } from './components/Carousel'
 import AuthWrapper from './components/Auth/AuthWrapper.jsx';
-import BetslipView from './components/Betslip/BetSlipView.jsx'
+
 
 
 function App() {
