@@ -35,19 +35,11 @@ export default function BetslipView({
     fetchUsers();
   }, [selections]);
 
-  const hasDuplicates = selections.some((item, index, array) =>
-    item.selectedMarket.betTypeId === 12314 &&
-    array.findIndex(obj =>
-      obj.selectedMarket.betTypeId === item.selectedMarket.betTypeId &&
-      obj.selectedEvent.hometeam === item.selectedEvent.hometeam &&
-      obj.selectedEvent.awayteam === item.selectedEvent.awayteam
-    ) !== index
-  );
 
   const handlePlaceBet = (selections, stake) => {
 
     console.log(hasDuplicates, { selections, "stake": stake })
-    PlaceBet(selections, stake);
+    placedBet(selections, stake);
 
     return selections, stake
   };
@@ -59,7 +51,7 @@ export default function BetslipView({
   if (!selections || selections.length === 0) {
     return (
       <div className={`w-80 bg-inherit text-white rounded-xl `}>
-        <div className="top-16 ">
+        <div className="top-16 pr-4 h-56">
           <h2 className="font-bold mb-4 pb-2 text-l ">Your Betslip is empty :(</h2>
         </div>
       </div>
@@ -70,8 +62,8 @@ export default function BetslipView({
 
 
   return (
-    <div className="w-80 rounded-xl text-sm ">
-      <div className="top-16 pr-6 ">
+    <div className="scrollbar min-w-86 w-86 rounded-xl text-sm overflow-x-hidden overflow-y-auto">
+      <div className="top-16 pr-2 h-56">
 
 
         {/* Selected Bets */}
@@ -109,35 +101,6 @@ export default function BetslipView({
           ))}
         </ul>
 
-        {/* Stake Input */}
-        <div className="mt-6 flex justify-end ">
-
-          <input
-            id="stake"
-            type="number"
-            min="0"
-            step="0.1"
-            value={stake}
-            onChange={(e) => setStake(e.target.value)}
-            placeholder="Bet"
-            className="w-20 bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-lime-400"
-          />
-        </div>
-
-        {/* Totals */}
-
-
-        {/* Place Bet Button */}
-        {hasDuplicates ? <span className='mt-4 block text-sm text-red-600'>Incompatible Selections</span> : <span></span>}
-        <button disabled={hasDuplicates} onClick={() => handlePlaceBet(selections, stake)}
-          type="button"
-          className={`mt-6 w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-        >
-          <div className="flex flex-col items-center leading-tight">
-            <span className='font-bold text-md'>Place Bet {stake}</span>
-            <span className="text-sm text-black/80">Return {potentialReturn}</span>
-          </div>
-        </button>
       </div>
     </div>
   );

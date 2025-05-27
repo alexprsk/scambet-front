@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react';
+import BetSlipButton from './BetslipButton';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
+
+
 
 
 export default function Betslip() {
@@ -30,8 +33,9 @@ export default function Betslip() {
   };
 
 
+
   return (
-    <div className="max-h-120 overflow-x-hidden overflow-y-auto h-100 w-86 mt-8 bg-inherit text-white m-4 p-4 hidden md:block border border-gray-500 rounded-xl">
+    <div className="max-h-120  h-110 w-96 mt-8 bg-inherit text-white m-4 p-4 hidden md:block border border-gray-500 rounded-xl">
       <div className='flex-row flex'>
         <button onClick={() => setSelectedBetslip(true)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 cursor-pointer rounded-tl-xl">Betslip</button>
         <button onClick={() => setSelectedBetslip(false)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2 cursor-pointer rounded-tr-xl">Open Bets</button>
@@ -46,14 +50,15 @@ export default function Betslip() {
           selections={selections} /> :
 
           <BetslipOpenBets selections={selections} />
-
-
         }
+        {selectedBetslip ?<BetSlipButton
+          stake={stake}
+          setStake={setStake}
+          potentialReturn={calculatePotentialReturn()}
+          totalOdds={calculateTotalOdds()}
+          selections={selections} />: <></>}
 
       </div>
     </div>
   )
-
-
-
 }
