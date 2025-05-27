@@ -35,12 +35,12 @@ export default function Betslip() {
 
 
   return (
-    <div className="max-h-120  h-110 w-96 mt-8 bg-inherit text-white m-4 p-4 hidden md:block border border-gray-500 rounded-xl">
-      <div className='flex-row flex'>
-        <button onClick={() => setSelectedBetslip(true)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 cursor-pointer rounded-tl-xl">Betslip</button>
-        <button onClick={() => setSelectedBetslip(false)} className="flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2 cursor-pointer rounded-tr-xl">Open Bets</button>
+    <div className="max-h-120  h-110 w-96 mt-8 bg-inherit text-white m-4 hidden md:block border border-gray-500 rounded-xl">
+      <div className='flex-row flex h-16'>
+        <button onClick={() => setSelectedBetslip(true)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2    ${selectedBetslip? 'bg-gray-700': ""} cursor-pointer rounded-tl-xl`}>Betslip</button>
+        <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip? '': "bg-gray-700"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
       </div>
-      <div className="top-16">
+      <div className="top-16 px-4 pb-4">
 
         {selectedBetslip ? <BetslipView
           stake={stake}
