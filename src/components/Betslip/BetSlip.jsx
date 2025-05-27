@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react';
-import BetSlipButton from './BetslipButton';
+import BetslipButton from './BetslipButton';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
 
@@ -51,7 +51,7 @@ export default function Betslip() {
 
           <BetslipOpenBets selections={selections} />
         }
-        {selectedBetslip ?<BetSlipButton
+        {selectedBetslip ?<BetslipButton
           stake={stake}
           setStake={setStake}
           potentialReturn={calculatePotentialReturn()}

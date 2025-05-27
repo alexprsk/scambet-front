@@ -6,7 +6,7 @@ import BetslipOpenBets from './BetslipOpenBets';
 
 
 
-export default function BetSlipButton({ stake,
+export default function BetslipButton({ stake,
     setStake,
     selections,
     totalOdds,
