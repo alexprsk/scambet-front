@@ -62,12 +62,12 @@ export default function BetslipView({
 
 
   return (
-    <div className="scrollbar min-w-86 w-86 rounded-xl text-sm overflow-x-hidden overflow-y-auto">
+    <div className="scrollbar w-90 rounded-xl text-sm overflow-x-hidden overflow-y-auto">
       <div className="top-16 pr-2 h-56">
 
 
         {/* Selected Bets */}
-        <ul className="space-y-4 ">
+        <ul className="space-y-px">
           {selections.map((selection, index) => (
             <li key={index} className="p-2 bg-gray-800 rounded text-sm">
               <div className="flex justify-between ">
