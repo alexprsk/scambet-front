@@ -29,7 +29,23 @@ export let PRELIVE_MARKETS = [
         awayteam: 'Inter Milan',
         odds: ['2.7', '3.0', '2.6']
     },
-    
+
+    {
+        time: '18:45',
+        hometeam: 'Chelsea',
+        awayteam: 'Barcelona',
+        odds: ['2.8', '3.4', '2.4']
+    },
+    {
+        time: '21:15',
+        hometeam: 'Dortmund',
+        awayteam: 'Napoli',
+        odds: ['2.2', '3.1', '3.3']
+    },
+    {
+        time: '20:00',
+        hometeam: 'Atletico Madrid',
+        awayteam: 'Manchester City',
+        odds: ['3.0', '3.2', '2.3']
+    }
 ];
-
-
