@@ -1,7 +1,7 @@
 export async function PlaceBet(selections, stake) {
     const payload = {
         selections: selections,
-        stake: parseFloat(stake)  // Ensure stake is a number
+        stake: parseFloat(stake) 
     };
 
     try {

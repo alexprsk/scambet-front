@@ -53,9 +53,6 @@ export default function BetslipView({
   };
 
 
-
-
-
   if (!selections || selections.length === 0) {
     return (
       <div className={`w-80 bg-inherit text-white rounded-xl `}>
