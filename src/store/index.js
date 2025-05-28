@@ -4,6 +4,8 @@ const BetslipState = {
   selections:[]
 };
 
+
+
 const betslipReducer = (state = BetslipState, action) => {
   switch (action.type) {
     case "SELECT_MARKET":
@@ -51,6 +53,27 @@ const betslipReducer = (state = BetslipState, action) => {
   }
 };
 
-const store = createStore(betslipReducer)
+
+let persistedState = BetslipState;
+
+try {
+  const stored = localStorage.getItem('betslip');
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    if (parsed && Array.isArray(parsed.selections)) {
+      persistedState = parsed;
+    }
+  }
+} catch (e) {
+  console.warn("Invalid betslip in localStorage", e);
+
+}
+
+const store = createStore(betslipReducer, persistedState)
+
+
+store.subscribe(()=>{
+  localStorage.setItem('betslip', JSON.stringify(store.getState()))
+})
 
 export default store;
