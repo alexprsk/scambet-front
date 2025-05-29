@@ -38,7 +38,7 @@ export default function BetslipButton({
         <>
             <div className="mt-4 flex flex-row justify-end ">
                 {isPlaced ? <span className='flex pt-3 pr-33 text-sm font-bold text-green-600'>Bet Placed!</span> : <span className='invisible block  h-5'> </span>}
-                {totalOdds > 0 ? <span className='block flex items-center mr-2'> @{totalOdds}</span> : <span></span>}
+                {totalOdds > 0 ? <span className=' flex items-center mr-2'> @{totalOdds}</span> : <span></span>}
                 <input
                     id="stake"
                     type="number"
@@ -55,7 +55,7 @@ export default function BetslipButton({
             <div>
                 <button disabled={hasDuplicates || !(stake > 0)} onClick={() => placeBet(selections, stake)}
                     type="button"
-                    className={`w-full bg-lime-500 hover:bg-lime-600 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates || !(stake > 0) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`w-full bg-emerald-600 hover:bg-emerald-400 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates || !(stake > 0) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                 >
                     <div className="flex flex-col items-center leading-tight">
                         <span className='font-bold text-md'>Place Bet {stake}</span>

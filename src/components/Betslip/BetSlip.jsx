@@ -37,8 +37,19 @@ export default function Betslip() {
   return (
     <div className="max-h-120  h-110 w-96 mt-8 bg-inherit text-white m-4 hidden md:block border border-gray-500 rounded-xl">
       <div className='flex-row flex h-16'>
-        <button onClick={() => setSelectedBetslip(true)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2    ${selectedBetslip? 'bg-gray-700': ""} cursor-pointer rounded-tl-xl`}>Betslip</button>
-        <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip? '': "bg-gray-700"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
+        <button
+          onClick={() => setSelectedBetslip(true)}
+          className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 ${selectedBetslip ? 'dark:bg-emerald-500 ' : 'dark:hover:bg-emerald-700'} cursor-pointer rounded-tl-xl`}
+        >
+          Betslip
+          <span
+            className={`inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold rounded-full bg-blue-200 text-blue-800 ${selections.length === 0 ? 'opacity-0' : 'opacity-100'
+              }`}
+          >
+            {selections.length}
+          </span>
+        </button>
+        <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip ? "dark:hover:bg-emerald-700" : "dark:bg-emerald-500"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
       </div>
       <div className="top-16 px-4 pb-4">
 
@@ -51,12 +62,12 @@ export default function Betslip() {
 
           <BetslipOpenBets selections={selections} />
         }
-        {selectedBetslip ?<BetslipButton
+        {selectedBetslip ? <BetslipButton
           stake={stake}
           setStake={setStake}
           potentialReturn={calculatePotentialReturn()}
           totalOdds={calculateTotalOdds()}
-          selections={selections} />: <></>}
+          selections={selections} /> : <></>}
 
       </div>
     </div>
