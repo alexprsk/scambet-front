@@ -43,3 +43,22 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced){
 
         }
     }
+
+    export  async function getOdds(){
+
+        try{
+            const response = await fetch('http://localhost:8000/sportsbook/odds', {method: 'GET'})
+            const resData = await response.json()
+
+
+            if (!response.ok){
+                throw new Error ("Failed to fetch latest events")
+            }
+            print(resData)
+        }catch (error){
+            console.log(error.message)
+
+        }
+            
+        
+    }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import SideBarLeft from './components/SideBarLeft.jsx';
 import './index.css'
@@ -15,6 +15,40 @@ import AuthWrapper from './components/Auth/AuthWrapper.jsx';
 
 function App() {
 
+  const [markets, setMarkets] = useState([]);
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await fetch('http://localhost:8000/sportsbook/odds');
+      const json  = await res.json();
+      console.log(json)
+
+  const transformed = (json.events[0] || [])
+    .filter(event => event.bookmakers?.length > 0 && event.bookmakers[0].markets?.length > 0)
+    .map(event => {
+      const outcomes = event.bookmakers[0].markets[0].outcomes || [];
+
+      return {
+        id: event.id,
+        sport: event.sport_key,
+        hometeam: event.home_team,
+        awayteam: event.away_team,
+        odds: outcomes.map(odd => ({ name: odd.name, price: odd.price })),
+        startTime: new Date(event.commence_time).toLocaleString(),
+      };
+
+    });
+      console.log(transformed);
+      setMarkets(transformed)
+    } catch (error) {
+      console.error('Error fetching odds:', error);
+    }
+  };
+
+  fetchData();
+}, []);
 
   return (
     <>
