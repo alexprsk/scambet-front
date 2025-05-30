@@ -72,6 +72,7 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
   };
 
   return (
+
     <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
       <div className="event_timer flex items-center justify-start pl-1 mr-1 text-white text-sm">
         {startTime.split(', ')[1]}
@@ -89,7 +90,10 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
       </div>
       <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
         <div className="event_timer flex items-center justify-start w-60 pl-1 mr-1 text-white text-sm">
-          {sport.replaceAll("_", " ")}
+          {sport.replaceAll("_", " ")
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ')}
         </div>
         {marketselections.map((selection, index) => {
           const isSelected = selections.some(
@@ -99,20 +103,19 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
               sel.selectedMarket.label === selection.label
           );
 
-        const isDisabled = !selection.odd;
+          const isDisabled = !selection.odd;
 
           return (
             <button
               key={index}
               onClick={() => !isDisabled && handleSelection(selection)}
               disabled={isDisabled}
-              className={`flex justify-between items-center w-40 h-10 m-1 ${
-                isDisabled 
-                  ? 'bg-gray-800 bg-opacity-20 cursor-not-allowed' 
+              className={`flex justify-between items-center w-40 h-10 m-1 ${isDisabled
+                  ? 'bg-gray-800 bg-opacity-20 cursor-not-allowed'
                   : isSelected
                     ? 'bg-emerald-500 dark:hover:bg-emerald-500 cursor-pointer'
                     : 'bg-gray-800 bg-opacity-20 dark:hover:bg-emerald-700 cursor-pointer'
-              } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 text-nowrap transition`}
+                } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 text-nowrap transition`}
             >
               <span>{selection.label}</span>
               <span>{selection.odd || <LockSvG />}</span>
