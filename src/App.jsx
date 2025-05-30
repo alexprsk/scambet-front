@@ -18,37 +18,39 @@ function App() {
   const [markets, setMarkets] = useState([]);
 
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await fetch('http://localhost:8000/sportsbook/odds');
-      const json  = await res.json();
-      console.log(json)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:8000/sportsbook/odds');
+        const json = await res.json();
+        console.log(json)
 
-  const transformed = (json.events[0] || [])
-    .filter(event => event.bookmakers?.length > 0 && event.bookmakers[0].markets?.length > 0)
-    .map(event => {
-      const outcomes = event.bookmakers[0].markets[0].outcomes || [];
+        const transformed = (json.events[0] || [])
+          .filter(event => event.bookmakers?.length > 0 && event.bookmakers[0].markets?.length > 0)
+          .map(event => {
+            const outcomes = event.bookmakers[0].markets[0].outcomes || [];
 
-      return {
-        id: event.id,
-        sport: event.sport_key,
-        hometeam: event.home_team,
-        awayteam: event.away_team,
-        odds: outcomes.map(odd => ({ name: odd.name, price: odd.price })),
-        startTime: new Date(event.commence_time).toLocaleString(),
-      };
+            return {
+              id: event.id,
+              sport: event.sport_key,
+              hometeam: event.home_team,
+              awayteam: event.away_team,
+              odds: outcomes.map(odd => ({ name: odd.name, price: odd.price })),
+              startTime: new Date(event.commence_time).toLocaleString(),
+            };
 
-    });
-      console.log(transformed);
-      setMarkets(transformed)
-    } catch (error) {
-      console.error('Error fetching odds:', error);
-    }
-  };
+          });
+        console.log(transformed);
+        setMarkets(transformed)
+      } catch (error) {
+        console.error('Error fetching odds:', error);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+    const intervalId = setInterval(fetchData, 40000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <>
@@ -68,8 +70,16 @@ useEffect(() => {
             <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10 ">
               <div className="events_card flex-1 flex-col rounded-md bg-gray-800 shadow-2xl" id="events_card">
                 <PreLiveMarketsTop />
-                {PRELIVE_MARKETS.map((market, index) => (
-                  <PreLiveMarkets key={index} {...market} />
+                {markets.map((market, index) => (
+                  <PreLiveMarkets
+                    key={index}
+                    id={market.id}
+                    sport={market.sport}
+                    hometeam={market.hometeam}
+                    awayteam={market.awayteam}
+                    odds={market.odds}
+                    startTime={market.startTime}
+                  />
                 ))}
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import LockSvG from "./LockSvG";
 
 
 export function PreLiveMarketsTop() {
@@ -31,21 +32,21 @@ export function PreLiveMarketsTop() {
 
 
 
-
-export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
+export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds, time }) {
 
   const dispatch = useDispatch();
   const selections = useSelector((state) => state.selections);
 
 
   const marketselections = [
-    { label: '1', value: hometeam, odd: odds[0], betTypeId: 12314 },
-    { label: 'x', value: 'Draw', odd: odds[1], betTypeId: 12314 },
-    { label: '2', value: awayteam, odd: odds[2], betTypeId: 12314 }
-  ];
+    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, id: id + '_home' },
+    { label: 'x', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, id: id + '_draw' },
+    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, id: id + '_away' }
+  ].filter(Boolean);
 
   const handleSelection = (selection) => {
-    const { label, value, odd, betTypeId } = selection;
+    const { label, value, odd, id, startTime } = selection;
+    if (!selection.odd) return;
 
 
 
@@ -56,13 +57,13 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
         selectedEvent: {
           hometeam,
           awayteam,
-          time,
+          time: startTime,
         },
         selectedMarket: {
           label,
           value,
           odds: odd,
-          betTypeId
+          betTypeId: id
         }
       }
     };
@@ -73,17 +74,23 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
   return (
     <div className="event_row flex-row flex bg-slate-700 hover:bg-slate-500 mb-px cursor-pointer rounded-md transition">
       <div className="event_timer flex items-center justify-start pl-1 mr-1 text-white text-sm">
-        {time}
+        {startTime.split(', ')[1]}
       </div>
+
       <div className="event_teams flex flex-col flex-1 ml-1 pl-2 items-left justify-start">
         <div className="event_teams_home_1 flex text-white text-sm">
           {hometeam}
         </div>
+
         <div className="event_teams_away_2 flex text-white text-sm">
           {awayteam}
         </div>
+
       </div>
       <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
+        <div className="event_timer flex items-center justify-start w-60 pl-1 mr-1 text-white text-sm">
+          {sport.replaceAll("_", " ")}
+        </div>
         {marketselections.map((selection, index) => {
           const isSelected = selections.some(
             sel =>
@@ -92,19 +99,24 @@ export function PreLiveMarkets({ hometeam, awayteam, odds, time }) {
               sel.selectedMarket.label === selection.label
           );
 
+        const isDisabled = !selection.odd;
+
           return (
-            <div
+            <button
               key={index}
-              onClick={() => handleSelection(selection)}
-              role="button"
-              className={`flex justify-between items-center w-40 h-10 m-1 text-gray-900 ${isSelected
-                  ? 'bg-emerald-500 dark:hover:bg-emerald-500'
-                  : 'bg-gray-800 bg-opacity-20 dark:hover:bg-emerald-700 dark:hover:border-gray-600'
-                } border-gray-300 focus:outline-none hover:bg-transparent focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 dark:focus:ring-gray-700 text-nowrap transition`}
+              onClick={() => !isDisabled && handleSelection(selection)}
+              disabled={isDisabled}
+              className={`flex justify-between items-center w-40 h-10 m-1 ${
+                isDisabled 
+                  ? 'bg-gray-800 bg-opacity-20 cursor-not-allowed' 
+                  : isSelected
+                    ? 'bg-emerald-500 dark:hover:bg-emerald-500 cursor-pointer'
+                    : 'bg-gray-800 bg-opacity-20 dark:hover:bg-emerald-700 cursor-pointer'
+              } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 text-nowrap transition`}
             >
               <span>{selection.label}</span>
-              <span>{selection.odd}</span>
-            </div>
+              <span>{selection.odd || <LockSvG />}</span>
+            </button>
           );
         })}
       </div>
