@@ -117,7 +117,7 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
                     : 'bg-gray-800 bg-opacity-20 dark:hover:bg-emerald-700 cursor-pointer'
                 } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 text-nowrap transition`}
             >
-              <span>{selection.label}</span>
+              <span>{selection.odd? selection.label : "Not Applicable"}</span>
               <span>{selection.odd || <LockSvG />}</span>
             </button>
           );
