@@ -90,7 +90,10 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
       </div>
       <div className="event_markets flex flex-row flex-1 ml-1 items-center justify-evenly">
         <div className="event_timer flex items-center justify-start w-60 pl-1 mr-1 text-white text-sm">
-          {sport.replaceAll("_", " ")}
+          {sport.replaceAll("_", " ")
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ')}
         </div>
         {marketselections.map((selection, index) => {
           const isSelected = selections.some(
