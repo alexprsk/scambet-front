@@ -94,7 +94,7 @@ export default function BetslipView({
                 <span>{selection.selectedMarket.value}</span>
 
                 <span className="text-gray-400"> @ </span>
-                <span className="text-lime-400">{selection.selectedMarket.odds}</span>
+                <span className="text-emerald-300 font-medium">{selection.selectedMarket.odds}</span>
               </div>
             </li>
           ))}
