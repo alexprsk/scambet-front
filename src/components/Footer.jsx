@@ -6,10 +6,9 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-2">Sponsors</h4>
           <ul className="space-y-1">
-            <li>Premier League</li>
-            <li>PAOK FC</li>
-            <li>Olympiacos BC</li>
-            <li>FIFA eWorld Cup</li>
+            <li>POAK FC</li>
+            <li>Olympios BC</li>
+            <li>FIFO eWorld Cup</li>
           </ul>
         </div>
 
@@ -17,9 +16,9 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-2">Payment Methods</h4>
           <ul className="space-y-1">
-            <li>Visa / Mastercard</li>
-            <li>PayPal, Skrill, Neteller</li>
-            <li>Apple Pay, Google Pay</li>
+            <li>Vosa / Mistercard</li>
+            <li>PayEnemy, Skill </li>
+            <li>Banana Pay, Giggle Pay</li>
             <li>Bank Transfer</li>
           </ul>
         </div>
@@ -85,10 +84,10 @@ export default function Footer() {
 
       <div className="mt-8 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
         <p>
-          © 2025 ScamBet Ltd. Licensed and regulated by the Gambling Commission under license number 12345.
+          2025 ScamBet Ltd. This is a fun project created to learn coding.
         </p>
         <p>
-          21+ | Gamble irresponsibly | Gambling Helpline: 2109237777
+          21+ | Don't Gamble irresponsibly | Gambling Helpline: 2109237777
         </p>
       </div>
     </footer>
