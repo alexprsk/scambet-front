@@ -8,6 +8,12 @@ export default function Registration({show, Hide}) {
 
     const handleSubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const acquisitionChannel = formData.getAll('acquisition'); //Can be used to store data from  checkboxes  needs formData.acquisition = acquisitionChannel;
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(data)
     Hide();
     };
 
@@ -32,25 +38,25 @@ export default function Registration({show, Hide}) {
           {/* Registration Form */}
           <form  onSubmit={handleSubmit} id="registrationForm" className="mt-4">
             <div className="mb-4">
-              <label htmlFor="registrationUsername" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="username" className="block text-white text-sm font-bold mb-2 text-left">
                 Username:
               </label>
               <input
                 type="text"
-                id="registrationUsername"
-                name="registrationUsername"
+                id="username"
+                name="username"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="firstName" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="first_name" className="block text-white text-sm font-bold mb-2 text-left">
                 First Name:
               </label>
               <input
                 type="text"
-                id="firstName"
+                id="first_name"
                 name="first_name"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
@@ -58,25 +64,25 @@ export default function Registration({show, Hide}) {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="lastName" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="last_name" className="block text-white text-sm font-bold mb-2 text-left">
                 Last Name:
               </label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="last_name"
+                name="last_name"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="phoneNumber" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="phone_number" className="block text-white text-sm font-bold mb-2 text-left">
                 Phone Number:
               </label>
               <input
                 type="text"
-                id="phoneNumber"
+                id="phone_number"
                 name="phone_number"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
@@ -97,13 +103,13 @@ export default function Registration({show, Hide}) {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="registrationPassword" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="password" className="block text-white text-sm font-bold mb-2 text-left">
                 Password:
               </label>
               <input
                 type="password"
-                id="registrationPassword"
-                name="registrationPassword"
+                id="password"
+                name="password"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />

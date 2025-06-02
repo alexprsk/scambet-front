@@ -12,7 +12,7 @@ export default function BetslipButton({
     potentialReturn
 }) {
 
-    const[isPlaced, setIsPlaced] = useState(null);
+    const [isPlaced, setIsPlaced] = useState(null);
     const [error, setError] = useState(null);
 
     const placeBet = async () => {
@@ -23,12 +23,12 @@ export default function BetslipButton({
         }
     };
 
-    
+
 
     const hasDuplicates = selections.some((item, index, array) =>
-        item.selectedMarket.betTypeId === 12314 &&
+        item.selectedMarket.eventId === item.selectedMarket.eventId &&
         array.findIndex(obj =>
-            obj.selectedMarket.betTypeId === item.selectedMarket.betTypeId &&
+            obj.selectedMarket.eventId === item.selectedMarket.eventId &&
             obj.selectedEvent.hometeam === item.selectedEvent.hometeam &&
             obj.selectedEvent.awayteam === item.selectedEvent.awayteam
         ) !== index
@@ -38,6 +38,7 @@ export default function BetslipButton({
         <>
             <div className="mt-4 flex flex-row justify-end ">
                 {isPlaced ? <span className='flex pt-3 pr-33 text-sm font-bold text-green-600'>Bet Placed!</span> : <span className='invisible block  h-5'> </span>}
+                {selections.length === 0 ? <span></span> : selections.length === 1 ? <span>Single</span> : <span>Parlay</span>}
                 {totalOdds > 0 ? <span className=' flex items-center mr-2'> @{totalOdds}</span> : <span></span>}
                 <input
                     id="stake"
@@ -51,7 +52,7 @@ export default function BetslipButton({
                 />
             </div>
             {hasDuplicates ? <span className='h-5  block text-sm text-red-600'>Incompatible Selections</span> : <span className='invisible block h-5'> </span>}
-            
+
             <div>
                 <button disabled={hasDuplicates || !(stake > 0)} onClick={() => placeBet(selections, stake)}
                     type="button"

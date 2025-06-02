@@ -17,13 +17,7 @@ function App() {
 
   const [markets, setMarkets] = useState([]);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMessage('2 seconds passed!');
-    }, 2000);
 
-    return () => clearTimeout(timeout);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +49,7 @@ function App() {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 40000);
+    const intervalId = setInterval(fetchData, 8000);
     return () => clearInterval(intervalId);
   }, []);
 

@@ -1,28 +1,31 @@
+
 function Login({ show, Hide }) {
+
+
+
+
+
+
+
+
   const handleOverlayClick = (e) => {
-    // Close only if the click is on the overlay itself
+    
     if (e.target.id === "loginModal") {
       Hide();
     }
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Get form data
     const formData = new FormData(e.target);
-    const username = formData.get('loginUsername');
-    const password = formData.get('loginPassword');
+    const data = Object.fromEntries(formData.entries());
+    formData.delete('username', 'password')
 
-    // Here you would typically:
-    // 1. Validate inputs
-    // 2. Send to authentication API
-    // 3. Handle response
-    console.log('Login attempt:', { username, password });
-
-    // For now, just close the modal
+    console.log(data)
+    e.target.reset()
     Hide();
-  };
+    };
 
   return (
     <div
@@ -53,34 +56,38 @@ function Login({ show, Hide }) {
             onSubmit={handleSubmit}  // Added onSubmit handler
           >
             <div className="mb-4">
-              <label htmlFor="loginUsername" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="username" className="block text-white text-sm font-bold mb-2 text-left">
                 Username:
               </label>
               <input
                 type="text"
-                id="loginUsername"
-                name="loginUsername"
+                id="username"
+                name="username"
+                
+              
                 required
-                className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-3 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="loginPassword" className="block text-white text-sm font-bold mb-2 text-left">
+              <label htmlFor="password" className="block text-white text-sm font-bold mb-2 text-left">
                 Password:
               </label>
               <input
                 type="password"
-                id="loginPassword"
-                name="loginPassword"
+                id="password"
+                name="password"
+                
+                
                 required
-                className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-3 px-3 bg-white  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="flex items-center justify-between">
               <button
-                type="submit"  // Changed from onClick to type="submit"
+                type="submit"  
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
               >
                 Login
