@@ -1,12 +1,6 @@
+import HandleLogin from "./http";
 
 function Login({ show, Hide }) {
-
-
-
-
-
-
-
 
   const handleOverlayClick = (e) => {
     
@@ -20,6 +14,8 @@ const handleSubmit = (e) => {
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+
+    HandleLogin(data)
     formData.delete('username', 'password')
 
     console.log(data)

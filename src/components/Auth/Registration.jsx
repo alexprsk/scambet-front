@@ -1,3 +1,5 @@
+import { HandleRegistration } from "./http";
+
 export default function Registration({show, Hide}) {
   const handleOverlayClick = (e) => {
     // Close only if the click is on the overlay itself
@@ -12,6 +14,7 @@ export default function Registration({show, Hide}) {
     const formData = new FormData(e.target);
     const acquisitionChannel = formData.getAll('acquisition'); //Can be used to store data from  checkboxes  needs formData.acquisition = acquisitionChannel;
     const data = Object.fromEntries(formData.entries());
+    HandleRegistration(data)
 
     console.log(data)
     Hide();
