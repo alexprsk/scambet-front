@@ -18,9 +18,7 @@ function App() {
   const [markets, setMarkets] = useState([]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMessage('2 seconds passed!');
-    }, 2000);
+
 
     return () => clearTimeout(timeout);
   }, []);

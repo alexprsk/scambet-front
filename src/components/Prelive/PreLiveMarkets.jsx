@@ -39,13 +39,13 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
 
 
   const marketselections = [
-    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, id: id + '_home' },
-    { label: 'x', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, id: id + '_draw' },
-    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, id: id + '_away' }
+    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, eventId: id  },
+    { label: 'x', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, eventId: id  },
+    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, eventId: id }
   ].filter(Boolean);
 
   const handleSelection = (selection) => {
-    const { label, value, odd, id, startTime } = selection;
+    const { label, value, odd, eventId, startTime } = selection;
     if (!selection.odd) return;
 
 
@@ -63,7 +63,7 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
           label,
           value,
           odds: odd,
-          betTypeId: id
+          eventId: eventId
         }
       }
     };

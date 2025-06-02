@@ -26,9 +26,9 @@ export default function BetslipButton({
 
 
     const hasDuplicates = selections.some((item, index, array) =>
-        item.selectedMarket.betTypeId === 12314 &&
+        item.selectedMarket.eventId === item.selectedMarket.eventId &&
         array.findIndex(obj =>
-            obj.selectedMarket.betTypeId === item.selectedMarket.betTypeId &&
+            obj.selectedMarket.eventId === item.selectedMarket.eventId &&
             obj.selectedEvent.hometeam === item.selectedEvent.hometeam &&
             obj.selectedEvent.awayteam === item.selectedEvent.awayteam
         ) !== index
