@@ -17,11 +17,7 @@ function App() {
 
   const [markets, setMarkets] = useState([]);
 
-  useEffect(() => {
 
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
