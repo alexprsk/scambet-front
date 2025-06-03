@@ -10,7 +10,7 @@ import BetslipOpenBets from './BetslipOpenBets';
 export default function Betslip() {
   const dispatch = useDispatch();
   const [stake, setStake] = useState('');
-  const { selections } = useSelector((state) => state);
+  const selections = useSelector((state) => state.betslip.selections);
   const [selectedBetslip, setSelectedBetslip] = useState(true)
 
   const calculatePotentialReturn = () => {

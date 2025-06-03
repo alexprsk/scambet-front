@@ -1,9 +1,8 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 const BetslipState = {
-  selections:[]
+  selections: []
 };
-
 
 
 const betslipReducer = (state = BetslipState, action) => {
@@ -11,12 +10,12 @@ const betslipReducer = (state = BetslipState, action) => {
     case "SELECT_MARKET":
       // Check if this exact selection already exists (match + market combination)
       const existingIndex = state.selections.findIndex(
-        sel => 
+        sel =>
           sel.selectedEvent.hometeam === action.payload.selectedEvent.hometeam &&
           sel.selectedEvent.awayteam === action.payload.selectedEvent.awayteam &&
           sel.selectedMarket.label === action.payload.selectedMarket.label
       );
-      
+
       if (existingIndex >= 0) {
         // If exists for same match and market label, remove it (toggle behavior)
         return {
@@ -35,7 +34,7 @@ const betslipReducer = (state = BetslipState, action) => {
           }]
         };
       }
-      
+
     case "DESELECT_MARKET":
       return {
         ...state,
@@ -47,33 +46,69 @@ const betslipReducer = (state = BetslipState, action) => {
           )
         )
       };
-      
+
     default:
       return state;
   }
 };
 
 
-let persistedState = BetslipState;
+let persistedBetslip = BetslipState;
+let persistedAuth = { user_id: null, authenticated: false };
 
 try {
   const stored = localStorage.getItem('betslip');
   if (stored) {
     const parsed = JSON.parse(stored);
     if (parsed && Array.isArray(parsed.selections)) {
-      persistedState = parsed;
+      persistedBetslip = parsed;
     }
+  }
+  const storedAuth = localStorage.getItem('auth');
+  if (storedAuth) {
+    persistedAuth = JSON.parse(storedAuth);
   }
 } catch (e) {
   console.warn("Invalid betslip in localStorage", e);
 
 }
 
-const store = createStore(betslipReducer, persistedState)
+
+const AuthState = { user_id: null, authenticated: false };
+
+const authStateReducer = (state = AuthState, action) => {
+  switch (action.type) {
+    case "Login":
+      return {
+        user_id: action.payload.user_id,
+        authenticated: true
+      };
+    case "Logout":
+      return {
+        user_id: null,
+        authenticated: false
+      };
+    default:
+      return state;
+  }
+};
 
 
-store.subscribe(()=>{
-  localStorage.setItem('betslip', JSON.stringify(store.getState()))
-})
+
+const rootReducer = combineReducers({
+  betslip: betslipReducer,
+  auth: authStateReducer
+});
+
+const store = createStore(rootReducer, {
+  betslip: persistedBetslip,
+  auth: persistedAuth   
+});
+
+store.subscribe(() => {
+  const state = store.getState();
+  localStorage.setItem('betslip', JSON.stringify(state.betslip));
+  localStorage.setItem('auth', JSON.stringify(state.auth));
+});
 
 export default store;

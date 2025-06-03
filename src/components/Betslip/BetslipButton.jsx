@@ -11,13 +11,14 @@ export default function BetslipButton({
     totalOdds,
     potentialReturn
 }) {
-
+    const user_id = useSelector((state) => state.auth.user_id);
     const [isPlaced, setIsPlaced] = useState(null);
     const [error, setError] = useState(null);
 
+
     const placeBet = async () => {
         try {
-            await handlePlaceBet(selections, stake, setIsPlaced, setError);
+            await handlePlaceBet(selections, stake, setIsPlaced, user_id);
         } catch (err) {
             setError(err.message);
         }
@@ -54,7 +55,7 @@ export default function BetslipButton({
             {hasDuplicates ? <span className='h-5  block text-sm text-red-600'>Incompatible Selections</span> : <span className='invisible block h-5'> </span>}
 
             <div>
-                <button disabled={hasDuplicates || !(stake > 0)} onClick={() => placeBet(selections, stake)}
+                <button disabled={hasDuplicates || !(stake > 0)} onClick={placeBet}
                     type="button"
                     className={`w-full bg-emerald-600 hover:bg-emerald-400 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates || !(stake > 0) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                 >

@@ -1,4 +1,6 @@
-export default async function handlePlaceBet(selections, stake, setIsPlaced){
+import { useSelector, useDispatch } from 'react-redux'
+
+export default async function handlePlaceBet(selections, stake, setIsPlaced, user_id){
         if (!selections || selections.length === 0) {
             console.log("No selections made");
             return;
@@ -15,7 +17,7 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userId: "1234",
+                    userId: String(user_id),
                     stake,
                     selections
                     

@@ -16,24 +16,7 @@ export default function BetslipView({
 
 
 
-  useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const response = await fetch('http://localhost:8000/auth/');
-        const resData = await response.json()
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data")
-        }
-        setPlacedBet(resData.selectedMarket)
-      } catch (error) {
-        setError({
-          message: error.message || "Could not fetch users"
-        })
-      }
-    }
-    fetchUsers();
-  }, [selections]);
 
 
 

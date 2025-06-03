@@ -46,7 +46,7 @@ export default function Registration({show, Hide}) {
               </label>
               <input
                 type="text"
-                id="username"
+                id="usernameReg"
                 name="username"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
@@ -111,7 +111,7 @@ export default function Registration({show, Hide}) {
               </label>
               <input
                 type="password"
-                id="password"
+                id="passwordReg"
                 name="password"
                 required
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"

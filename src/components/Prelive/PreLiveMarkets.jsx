@@ -35,7 +35,7 @@ export function PreLiveMarketsTop() {
 export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds, time }) {
 
   const dispatch = useDispatch();
-  const selections = useSelector((state) => state.selections);
+  const selections = useSelector((state) => state.betslip.selections);
 
 
   const marketselections = [
@@ -58,12 +58,12 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
           hometeam,
           awayteam,
           time: startTime,
+          eventId: eventId
         },
         selectedMarket: {
           label,
           value,
-          odds: odd,
-          eventId: eventId
+          odds: odd
         }
       }
     };

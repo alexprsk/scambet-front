@@ -1,27 +1,42 @@
 import HandleLogin from "./http";
+import { useDispatch } from 'react-redux';
 
 function Login({ show, Hide }) {
 
+  const dispatch = useDispatch();
+
   const handleOverlayClick = (e) => {
-    
+
     if (e.target.id === "loginModal") {
       Hide();
     }
   };
 
-const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    HandleLogin(data)
-    formData.delete('username', 'password')
+    try {
+      const { access_token, user_id } = await HandleLogin(data);
 
-    console.log(data)
-    e.target.reset()
-    Hide();
-    };
+      // You may extract user_id from token (if it's a JWT) or just use the username
+      dispatch({
+        type: 'Login',
+        payload: {
+          user_id : user_id
+        }
+      });
+
+      console.log("Logged in with user:", user_id);
+      e.target.reset();
+      Hide();
+    } catch (err) {
+      console.error("Login failed:", err.message);
+      alert(err.message);
+    }
+  };
 
   return (
     <div
@@ -57,10 +72,10 @@ const handleSubmit = (e) => {
               </label>
               <input
                 type="text"
-                id="username"
+                id="usernameLogin"
                 name="username"
-                
-              
+
+
                 required
                 className="shadow appearance-none border rounded w-full py-3 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -74,8 +89,8 @@ const handleSubmit = (e) => {
                 type="password"
                 id="password"
                 name="password"
-                
-                
+
+
                 required
                 className="shadow appearance-none border rounded w-full py-3 px-3 bg-white  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -83,7 +98,7 @@ const handleSubmit = (e) => {
 
             <div className="flex items-center justify-between">
               <button
-                type="submit"  
+                type="submit"
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
               >
                 Login
