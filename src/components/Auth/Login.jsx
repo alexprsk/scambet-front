@@ -25,7 +25,8 @@ function Login({ show, Hide }) {
       dispatch({
         type: 'Login',
         payload: {
-          user_id : user_id
+          user_id : user_id,
+          access_token: access_token
         }
       });
 

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BetslipButton from './BetslipButton';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
@@ -8,6 +8,39 @@ import BetslipOpenBets from './BetslipOpenBets';
 
 
 export default function Betslip() {
+  const authenticated = useSelector((state) => state.auth.authenticated);
+  const user_id = useSelector((state) => state.auth.user_id);
+
+
+  useEffect(() => {
+    if (!authenticated) return;
+
+    fetch(`http://localhost:8000/sportsbook/open_bets/${user_id}`, {
+      method: "GET",
+      credentials: 'include' // Important for sending cookies
+    })
+      .then((res) => {
+        if (access_token == null){
+          return
+        }
+        if (!res.ok) {
+          if (res.status === 401) {
+            throw new Error("Please login to view your bets");
+          }
+          throw new Error("Error fetching bets");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setBets(data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  }, [authenticated]);
+
   const dispatch = useDispatch();
   const [stake, setStake] = useState('');
   const selections = useSelector((state) => state.betslip.selections);

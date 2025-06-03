@@ -32,16 +32,16 @@ export function PreLiveMarketsTop() {
 
 
 
-export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds, time }) {
+export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds }) {
 
   const dispatch = useDispatch();
   const selections = useSelector((state) => state.betslip.selections);
 
 
   const marketselections = [
-    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, eventId: id  },
-    { label: 'x', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, eventId: id  },
-    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, eventId: id }
+    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, eventId: id, startTime  },
+    { label: 'x', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, eventId: id, startTime },
+    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, eventId: id, startTime }
   ].filter(Boolean);
 
   const handleSelection = (selection) => {
@@ -57,7 +57,7 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds,
         selectedEvent: {
           hometeam,
           awayteam,
-          time: startTime,
+          startTime,
           eventId: eventId
         },
         selectedMarket: {

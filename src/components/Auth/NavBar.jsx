@@ -6,7 +6,7 @@ import { HandleLogout } from './http';
 
 export default function NavBar({ onLoginClick, onRegistrationClick}) {
   
-  const authenticated = useSelector((state) => state.auth.authenticated);
+    const authenticated = useSelector((state) => state.auth.authenticated);
     const dispatch = useDispatch();
   
     const handleLogoutClick = async () => {

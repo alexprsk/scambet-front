@@ -17,7 +17,7 @@ function App() {
 
   const [markets, setMarkets] = useState([]);
 
-
+  
 
   useEffect(() => {
     const fetchData = async () => {
