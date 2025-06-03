@@ -14,10 +14,10 @@ export default async function HandleLogin(data) {
     throw new Error(error.detail);
   }
 
-  const { access_token, user_id } = await response.json(); // ⬅️ Extract user_id too
+  const { access_token, user_id } = await response.json(); 
   document.cookie = `access_token=${access_token}; path=/`;
 
-  return { access_token, user_id }; // ⬅️ Return both
+  return { access_token, user_id }; // 
 }
 
 
@@ -53,3 +53,18 @@ export async function HandleRegistration(data) {
 }
 
 
+export  async function HandleLogout() {
+    const cookies = document.cookie.split(";");
+    
+    // Iterate through all cookies and delete each one
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        // Set the cookie's expiry date to a past date to delete it
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+    
+
+  return "Cookie deleted "; 
+}

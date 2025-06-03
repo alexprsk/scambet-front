@@ -1,7 +1,22 @@
 import ScambetLogo from '../../assets/ScambetLogo.jpg'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export default function NavBar({ onLoginClick, onRegistrationClick }) {
+import { HandleLogout } from './http';
+
+export default function NavBar({ onLoginClick, onRegistrationClick}) {
+  
+  const authenticated = useSelector((state) => state.auth.authenticated);
+    const dispatch = useDispatch();
+  
+    const handleLogoutClick = async () => {
+    await HandleLogout();             // Delete cookies
+    dispatch({ type: "Logout" }); 
+    console.log(authenticated)    // Update Redux state
+  };
+  
   return (
+    
 <nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
   <div className="relative flex h-12 items-center justify-between px-4">
     
@@ -42,7 +57,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
       <button
         type="button"
         id="userAuthenticatedBalance"
-        className="hidden bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer"
+        className={`${authenticated? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer`}
       >
         <p>0.00</p>
       </button>
@@ -51,7 +66,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
   onClick={onRegistrationClick}
   type="button"
   id="registerBtn"
-  className="text-sm px-4 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition duration-200 cursor-pointer"
+  className={`${authenticated ? "hidden" : ""} text-sm px-4 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition duration-200 cursor-pointer`}
 >
   Register
 </button>
@@ -60,15 +75,16 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
   onClick={onLoginClick}
   type="button"
   id="loginBtn"
-  className="text-sm px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 transition duration-200 cursor-pointer"
+  className={`${authenticated? "hidden" : ""} text-sm px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 transition duration-200 cursor-pointer`}
 >
   Login
 </button>
 
 <button
+  onClick={handleLogoutClick}
   type="button"
   id="logoutBtn"
-  className="hidden text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200 cursor-pointer"
+  className={`${authenticated ? "" : "hidden"}  text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200 cursor-pointer`}
 >
   Logout
 </button>

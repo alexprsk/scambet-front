@@ -10,6 +10,12 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
             throw new Error("Bet amount needs to be higher")
         }
 
+        if (user_id === "" || user_id == null || user_id == undefined){
+            alert("User must be logged in to place bets")
+            throw new Error("User must be logged in to place bets")
+            
+        }
+
         try {
             const response = await fetch('http://localhost:8000/sportsbook/place_bet', {
                 method: 'POST',
@@ -19,7 +25,8 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
                 body: JSON.stringify({
                     userId: String(user_id),
                     stake,
-                    selections
+                    selections,
+                    status: "pending"
                     
                 })
             });
@@ -31,7 +38,7 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
             const resData = await response.json();
             console.log(resData)
             console.log("Sent payload:", {
-                userId: "1234",
+                userId: String(user_id),
                 stake,
                 selections
                     
