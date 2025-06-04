@@ -130,9 +130,9 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds 
               className={`flex justify-between items-center w-40 h-10 m-1 ${isDisabled
                   ? 'bg-gray-800 bg-opacity-20 cursor-not-allowed'
                   : isSelected
-                    ? 'bg-emerald-500 dark:hover:bg-emerald-500 cursor-pointer'
-                    : 'bg-gray-800 bg-opacity-20 dark:hover:bg-emerald-700 cursor-pointer'
-                } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 dark:text-white dark:border-gray-600 text-nowrap transition`}
+                    ? 'bg-emerald-500 hover:bg-emerald-500 cursor-pointer'
+                    : 'bg-gray-800 bg-opacity-20 hover:bg-emerald-700 cursor-pointer'
+                } border-gray-300 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 text-white border-gray-600 text-nowrap transition`}
             >
               <span>{selection.odd? selection.label : "Not Applicable"}</span>
               <span>{selection.odd || <LockSvG />}</span>
