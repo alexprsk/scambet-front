@@ -21,7 +21,7 @@ export function PreLiveMarketsTop() {
       <div className="market_type1x2 flex-1">
         <div className="market_type1x2 flex flex-row items-center justify-evenly h-full leading-xs text-white  text-center text-tiny s:text-xxs">
           
-          <span className="flex-1 flex"><strong>Head to Head</strong></span>
+          <span className="flex-1 pl-18 text-sm font-sans">Head to Head</span>
          
         </div>
       </div>
