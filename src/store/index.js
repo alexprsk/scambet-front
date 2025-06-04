@@ -91,7 +91,7 @@ const authStateReducer = (state = AuthState, action) => {
         access_token: null
       };
     default:
-      return state;
+      return state; 
   }
 };
 
