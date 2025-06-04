@@ -15,7 +15,7 @@ export const useOpenBets = () => {
 
     const fetchOpenBets = async () => {
       try {
-        const response = await fetch('http://localhost:8000/sportsbook/open_bets', {
+        const response = await fetch('/api/sportsbook/open_bets', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
