@@ -8,41 +8,7 @@ import BetslipOpenBets from './BetslipOpenBets';
 
 
 
-export default function Betslip() {
-  const authenticated = useSelector((state) => state.auth.authenticated);
-
-
-useEffect(() => {
-  const authData = JSON.parse(localStorage.getItem("auth"));
-  const token = authData?.access_token;
-
-  if (!authenticated || !token) return;
-
-  const fetchOpenBets = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/sportsbook/open_bets', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || "Fetch failed");
-      }
-
-      const data = await response.json();
-      console.log("Open bets:", data);
-    } catch (error) {
-      console.error("Error fetching open bets:", error);
-    }
-  };
-
-  fetchOpenBets();
-}, [authenticated]);
+export default function Betslip( {openbets}) {
 
 
 
@@ -89,7 +55,7 @@ return (
       </button>
       <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip ? "dark:hover:bg-emerald-700" : "dark:bg-emerald-500"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
     </div>
-    <div className="top-16 px-4 pb-4">
+    <div className="top-16 px-4 pb-4 ">
 
       {selectedBetslip ? <BetslipView
         stake={stake}
@@ -98,7 +64,7 @@ return (
         totalOdds={calculateTotalOdds()}
         selections={selections} /> :
 
-        <BetslipOpenBets selections={selections} />
+        <BetslipOpenBets openbets={openbets} />
       }
       {selectedBetslip ? <BetslipButton
         stake={stake}
