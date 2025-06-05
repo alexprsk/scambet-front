@@ -3,7 +3,7 @@ export default async function HandleLogin(data) {
   body.append('username', data.username);
   body.append('password', data.password);
 
-  const response = await fetch('https://63.178.180.186/auth/token', {
+  const response = await fetch('https://scambet.org/auth/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body
