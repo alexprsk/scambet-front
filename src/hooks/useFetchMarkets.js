@@ -7,7 +7,7 @@ export const useFetchMarkets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('https://scambet.org/sportsbook/odds');
+        const res = await fetch('https://localhost:8000/sportsbook/odds');
         const json = await res.json();
 
         const transformed = (json.events[0] || [])
