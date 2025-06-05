@@ -3,7 +3,7 @@ export default async function HandleLogin(data) {
   body.append('username', data.username);
   body.append('password', data.password);
 
-  const response = await fetch('/auth/token', {
+  const response = await fetch('http://scambet:8000/auth/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body
@@ -26,7 +26,7 @@ export default async function HandleLogin(data) {
 export async function HandleRegistration(data) {
 
     try {
-        const response = await fetch('/auth/sign-up', {
+        const response = await fetch('http://scambet:8000/auth/sign-up', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ export const useFetchMarkets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/sportsbook/odds');
+        const res = await fetch('/api/sportsbook/odds');
         const json = await res.json();
 
         const transformed = (json.events[0] || [])
