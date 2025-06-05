@@ -17,7 +17,7 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
     }
 
     try {
-        const response = await fetch('http://localhost:8000/sportsbook/place_bet', {
+        const response = await fetch('/api/sportsbook/place_bet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
