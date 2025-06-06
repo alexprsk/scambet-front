@@ -7,8 +7,7 @@ const BetslipState = {
 
 const betslipReducer = (state = BetslipState, action) => {
   switch (action.type) {
-    case "SELECT_MARKET":
-      // Check if this exact selection already exists (match + market combination)
+    case "SELECT_MARKET": {
       const existingIndex = state.selections.findIndex(
         sel =>
           sel.selectedEvent.hometeam === action.payload.selectedEvent.hometeam &&
@@ -17,7 +16,6 @@ const betslipReducer = (state = BetslipState, action) => {
       );
 
       if (existingIndex >= 0) {
-        // If exists for same match and market label, remove it (toggle behavior)
         return {
           ...state,
           selections: state.selections.filter(
@@ -25,7 +23,6 @@ const betslipReducer = (state = BetslipState, action) => {
           )
         };
       } else {
-        // If new, add it
         return {
           ...state,
           selections: [...state.selections, {
@@ -34,6 +31,7 @@ const betslipReducer = (state = BetslipState, action) => {
           }]
         };
       }
+    }
 
     case "DESELECT_MARKET":
       return {
@@ -91,7 +89,7 @@ const authStateReducer = (state = AuthState, action) => {
         access_token: null
       };
     default:
-      return state; 
+      return state;
   }
 };
 
@@ -104,7 +102,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, {
   betslip: persistedBetslip,
-  auth: persistedAuth   
+  auth: persistedAuth
 });
 
 store.subscribe(() => {
