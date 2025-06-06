@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
-import handlePlaceBet from './http.js'
+import handlePlaceBet from './Betslip.api/handlePlaceBet.js'
 
 export default function BetslipButton({
     stake,
@@ -15,6 +15,18 @@ export default function BetslipButton({
     const [isPlaced, setIsPlaced] = useState(null);
     const [error, setError] = useState(null);
 
+
+        useEffect(() => {
+        let timer;
+        if (isPlaced) {
+            // Set a timer to clear the isPlaced message after 3 seconds (3000ms)
+            timer = setTimeout(() => {
+                setIsPlaced(null);
+            }, 3000);
+        }
+        // Clear the timer when the component unmounts or isPlaced changes
+        return () => clearTimeout(timer);
+    }, [isPlaced]);
 
     const placeBet = async () => {
         try {
@@ -38,9 +50,9 @@ export default function BetslipButton({
     return (
         <>
             <div className="mt-4 flex flex-row justify-end ">
-                {isPlaced ? <span className='flex pt-3 pr-33 text-sm font-bold text-green-600'>Bet Placed!</span> : <span className='invisible block  h-5'> </span>}
-                {selections.length === 0 ? <span></span> : selections.length === 1 ? <span>Single</span> : <span>Parlay</span>}
-                {totalOdds > 0 ? <span className=' flex items-center mr-2'> @{totalOdds}</span> : <span></span>}
+                {isPlaced ? <span className='flex pt-3 flex-1 text-sm font-bold text-green-600  '>Bet Placed!</span> : <span className='invisible block h-5 '> </span>}
+                {selections.length === 0 ? <span className='flex justify-end items-center pr-2 w-20'></span> : selections.length === 1 ? <span className='flex justify-end items-center pr-2 w-20'>Single</span> : <span className='flex justify-end items-center pr-2 w-20'>Parlay</span>}
+                {totalOdds > 0 ? <span className=' flex items-center mr-2 text-sm'> @{totalOdds}</span> : <span></span>}
                 <input
                     id="stake"
                     type="number"
@@ -49,7 +61,7 @@ export default function BetslipButton({
                     value={stake}
                     onChange={(e) => setStake(Number(e.target.value))}
                     placeholder="Bet"
-                    className="w-20 bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-lime-400"
+                    className="w-20 bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:ring-emerald-400"
                 />
             </div>
             {hasDuplicates ? <span className='h-5  block text-sm text-red-600'>Incompatible Selections</span> : <span className='invisible block h-5'> </span>}

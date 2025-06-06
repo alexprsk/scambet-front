@@ -81,15 +81,17 @@ const authStateReducer = (state = AuthState, action) => {
     case "Login":
       return {
         user_id: action.payload.user_id,
-        authenticated: true
+        authenticated: true,
+        access_token: action.payload.access_token
       };
     case "Logout":
       return {
         user_id: null,
-        authenticated: false
+        authenticated: false,
+        access_token: null
       };
     default:
-      return state;
+      return state; 
   }
 };
 

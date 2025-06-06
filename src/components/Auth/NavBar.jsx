@@ -6,7 +6,7 @@ import { HandleLogout } from './http';
 
 export default function NavBar({ onLoginClick, onRegistrationClick}) {
   
-  const authenticated = useSelector((state) => state.auth.authenticated);
+    const authenticated = useSelector((state) => state.auth.authenticated);
     const dispatch = useDispatch();
   
     const handleLogoutClick = async () => {
@@ -17,7 +17,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick}) {
   
   return (
     
-<nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-lime-300 shadow-lg shadow-green-500/20">
+<nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-emerald-300 shadow-lg shadow-green-500/20">
   <div className="relative flex h-12 items-center justify-between px-4">
     
     {/* Logo and Navigation Links */}

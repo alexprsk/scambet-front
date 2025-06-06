@@ -3,7 +3,7 @@ export default async function HandleLogin(data) {
   body.append('username', data.username);
   body.append('password', data.password);
 
-  const response = await fetch('http://localhost:8000/auth/token', {
+  const response = await fetch('/api/auth/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body
@@ -26,7 +26,7 @@ export default async function HandleLogin(data) {
 export async function HandleRegistration(data) {
 
     try {
-        const response = await fetch('http://localhost:8000/auth/sign-up', {
+        const response = await fetch('/api/auth/sign-up', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,4 +67,14 @@ export  async function HandleLogout() {
     
 
   return "Cookie deleted "; 
+}
+
+
+export function getCookie(name) {
+  const cookies = document.cookie.split('; ');
+  for (const cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key === name) return value;
+  }
+  return null;
 }
