@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import './App.css';
 import SideBarLeft from './components/SideBarLeft.jsx';
 import './index.css'
@@ -15,7 +15,6 @@ import { useOpenBets } from './hooks/useOpenBets.js';
 
 function App() {
 
-  const [userBets, setUserBets] = useState([]);
   const markets = useFetchMarkets();
   const openbets = useOpenBets();
 
