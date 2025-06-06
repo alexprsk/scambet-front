@@ -26,7 +26,7 @@ jobs:
 
       - name: Set lowercase repository
         run: |
-          echo "GH_REPO_LOWER=ghcr.io/$(echo ${{github.repository}} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV        
+          echo "GH_REPO_LOWER=ghcr.io/$(echo ${{github.actor}} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV        
 
       
       - name: Set Github Registry Repo
