@@ -24,17 +24,18 @@ jobs:
       - name: build-npm-action
         run :  npm install && npm run build
 
-      - name: Set lowercase repository
+      - name: Set repository path
         run: |
-          echo "GH_REPO_LOWER=ghcr.io/$(echo ${{github.actor}} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV        
-
-      
-      - name: Set Github Registry Repo
-        run: |
+          # Use lowercase repository path
+          REPO_PATH=ghcr.io/$(echo "${{github.repository}}" | tr '[:upper:]' '[:lower:]')
+          echo "REPO_PATH=${REPO_PATH}" >> $GITHUB_ENV
+          
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/prd.scambetfront" >> $GITHUB_ENV
+              echo "IMAGE_NAME=prd-scambetfront" >> $GITHUB_ENV
           elif [ "$GITHUB_REF" == "refs/heads/staging" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/stg.scambetfront" >> $GITHUB_ENV
+              echo "IMAGE_NAME=stg-scambetfront" >> $GITHUB_ENV
+          fi
+          echo "FULL_IMAGE=${REPO_PATH}/${IMAGE_NAME}" >> $GITHUB_ENV
           fi
           echo "Using image: $GH_REPO"
 
@@ -45,53 +46,27 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.CR_PAT}}
 
-
-      - name: 'Build Inventory Image'
+      - name: 'Build and Push Image'
         run: |
-          docker build -t $GHCR_REPO:latest .
-          docker push $GHCR_REPO:latest
+          echo "Building and pushing ${FULL_IMAGE}:latest"
+          docker build -t ${FULL_IMAGE}:latest .
+          docker push ${FULL_IMAGE}:latest
 
       - name: Run Cleanup Script
         run:  echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
 
 
-      - name: Generate and display summary
+      - name: Generate summary
         run: |
           echo "### 🚀 Docker Image Build and Push Summary 🚀" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
-          echo "- **Docker Image Name**: \`$DOCKER_REPO:${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Latest Tag**: \`$DOCKER_REPO:latest\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Run Number**: \`${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Docker Image**: \`${FULL_IMAGE}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Latest Tag**: \`${FULL_IMAGE}:latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version Tag**: \`${FULL_IMAGE}:${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Steps Completed:" >> $GITHUB_STEP_SUMMARY
-          echo "1. ✅ Code checkout" >> $GITHUB_STEP_SUMMARY
-          echo "2. ✅ Python setup" >> $GITHUB_STEP_SUMMARY
-          echo "3. ✅ Dependencies installed" >> $GITHUB_STEP_SUMMARY
-          echo "4. ✅ Unit tests passed" >> $GITHUB_STEP_SUMMARY
-          echo "5. ✅ Docker image built" >> $GITHUB_STEP_SUMMARY
-          echo "6. ✅ Docker image pushed" >> $GITHUB_STEP_SUMMARY
-          echo "7. ✅ Run Cleanup Script" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Deleted Docker Tags" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-          echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "### Next Steps:" >> $GITHUB_STEP_SUMMARY
-          echo "- Pull the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker pull $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Pull the latest image:" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker pull $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Run the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker run -p 5000:5000 $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Run the Docker image (latest):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker run -p 5000:5000 $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          
+          echo "### Pull Commands:" >> $GITHUB_STEP_SUMMARY
+          echo "```bash" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ${FULL_IMAGE}:latest" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ${FULL_IMAGE}:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
