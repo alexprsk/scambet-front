@@ -41,8 +41,8 @@ jobs:
 
       - name: 'Build Inventory Image'
         run: |
-          docker build -t GHCR_REPO:latest .
-          docker push GHCR_REPO:latest
+          docker build -t $GHCR_REPO:latest .
+          docker push $GHCR_REPO:latest
 
       - name: Run Cleanup Script
         run:  echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
