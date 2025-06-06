@@ -1,33 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 
 
 export default function BetslipView({
-  stake,
-  setStake,
   selections,
-  totalOdds,
-  potentialReturn,
 
 }) {
   const dispatch = useDispatch();
-  const [error, setError] = useState();
-  const [placedBet, setPlacedBet] = useState([]);
-
-
-
-
-
-
-
-  const handlePlaceBet = (selections, stake) => {
-
-    console.log(hasDuplicates, { selections, "stake": stake })
-
-    placedBet(selections, stake);
-
-    return selections, stake
-  };
 
 
   if (!selections || selections.length === 0) {

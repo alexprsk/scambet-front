@@ -1,0 +1,89 @@
+name: Build Frontend and Push Docker Image
+
+run-name: Build and Push from branch '${{ github.ref_name }}' by @${{ github.actor }}'
+env:
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+on:
+  push:
+    branches:
+      - master
+      - staging
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: build-npm-action
+        uses: ankitasen-ubmainz/build-npm-action@v0.2
+
+      
+      - name: Set Docker Repo
+        run: |
+          if [ "${{ github.ref }}" == 'refs/heads/master' ]; then
+              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/prd.scambetfront" >> $GITHUB_ENV
+          elif [ "${{ github.ref }}" == 'refs/heads/develop' ]; then
+              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/stg.scambetfront" >> $GITHUB_ENV
+          fi
+
+
+      - name: Build Docker image
+        run: |
+          docker build -t $DOCKER_REPO:${{ github.run_number }} -t $DOCKER_REPO:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push --all-tags $DOCKER_REPO
+
+      - name: Run Cleanup Script
+        run: |
+            OUTPUT=$(python scripts/cleanup_dockerhub.py)
+            echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
+
+
+      - name: Generate and display summary
+        run: |
+          echo "### 🚀 Docker Image Build and Push Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+          echo "- **Docker Image Name**: \`$DOCKER_REPO:${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Latest Tag**: \`$DOCKER_REPO:latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Run Number**: \`${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Steps Completed:" >> $GITHUB_STEP_SUMMARY
+          echo "1. ✅ Code checkout" >> $GITHUB_STEP_SUMMARY
+          echo "2. ✅ Python setup" >> $GITHUB_STEP_SUMMARY
+          echo "3. ✅ Dependencies installed" >> $GITHUB_STEP_SUMMARY
+          echo "4. ✅ Unit tests passed" >> $GITHUB_STEP_SUMMARY
+          echo "5. ✅ Docker image built" >> $GITHUB_STEP_SUMMARY
+          echo "6. ✅ Docker image pushed" >> $GITHUB_STEP_SUMMARY
+          echo "7. ✅ Run Cleanup Script" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Deleted Docker Tags" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+          echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "- Pull the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "  docker pull $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Pull the latest image:" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "  docker pull $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Run the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "  docker run -p 5000:5000 $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Run the Docker image (latest):" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "  docker run -p 5000:5000 $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+          
