@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
-import BetslipView from './BetSlipView';
-import BetslipOpenBets from './BetslipOpenBets';
 import handlePlaceBet from './Betslip.api/handlePlaceBet.js'
 
 export default function BetslipButton({

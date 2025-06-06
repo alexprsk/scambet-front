@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import { useState  } from 'react';
 import BetslipButton from './BetslipButton';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
@@ -10,9 +10,6 @@ import BetslipOpenBets from './BetslipOpenBets';
 
 export default function Betslip( {openbets}) {
 
-
-
-const dispatch = useDispatch();
 const [stake, setStake] = useState('');
 const selections = useSelector((state) => state.betslip.selections);
 const [selectedBetslip, setSelectedBetslip] = useState(true)

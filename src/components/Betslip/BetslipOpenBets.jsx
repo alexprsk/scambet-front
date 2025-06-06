@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { formatInTimeZone, format } from 'date-fns-tz';
+import  { useState } from 'react';
+import { formatInTimeZone } from 'date-fns-tz';
 import { el } from 'date-fns/locale';
 
 export default function BetslipOpenBets({ openbets }) {

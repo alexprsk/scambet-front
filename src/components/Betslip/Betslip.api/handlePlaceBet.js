@@ -1,5 +1,3 @@
-import { useSelector, useDispatch } from 'react-redux'
-
 export default async function handlePlaceBet(selections, stake, setIsPlaced, user_id, status) {
     if (!selections || selections.length === 0) {
         console.log("No selections made");
