@@ -6,7 +6,7 @@ import Carousel from './components/Carousel';
 import Betslip from './components/Betslip/BetSlip.jsx'
 import Footer from './components/Footer.jsx';
 import { PreLiveMarkets, PreLiveMarketsTop } from './components/Prelive/PreLiveMarkets';
-import { IMAGES } from './components/Carousel'
+import { IMAGES } from './constants/images.jsx';
 import AuthWrapper from './components/Auth/AuthWrapper.jsx';
 import { useFetchMarkets } from './hooks/useFetchMarkets.js';
 import { useOpenBets } from './hooks/useOpenBets.js';
