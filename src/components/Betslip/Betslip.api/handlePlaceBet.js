@@ -1,4 +1,4 @@
-export default async function handlePlaceBet(selections, stake, setIsPlaced, user_id, status) {
+export default async function handlePlaceBet(selections, stake, setIsPlaced, user_id) {
     if (!selections || selections.length === 0) {
         console.log("No selections made");
         return;
@@ -45,7 +45,6 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
 
     } catch (error) {
         setIsPlaced(false);
-        setError(error.message);
         console.log(error.message)
 
     }
