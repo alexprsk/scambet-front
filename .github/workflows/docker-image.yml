@@ -2,10 +2,6 @@ name: Build Frontend and Push Docker Image
 
 run-name: Build and Push from branch ${{ github.ref_name }} by @${{ github.actor }}
 
-
-
-  
-
 on:
   push:
     branches:
@@ -22,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: build-npm-action
-        run :  npm install && npm run build
+        run: npm install && npm run build
 
       - name: Set repository path
         run: |
@@ -49,10 +45,11 @@ jobs:
           echo "Building and pushing ${FULL_IMAGE}:latest"
           docker build -t ${FULL_IMAGE}:latest .
           docker push ${FULL_IMAGE}:latest
-
-      - name: Run Cleanup Script
-        run:  echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
-
+          
+          # Optionally tag with run number
+          echo "Also tagging with run number ${{ github.run_number }}"
+          docker tag ${FULL_IMAGE}:latest ${FULL_IMAGE}:${{ github.run_number }}
+          docker push ${FULL_IMAGE}:${{ github.run_number }}
 
       - name: Generate summary
         run: |
