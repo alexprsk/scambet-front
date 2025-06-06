@@ -36,8 +36,6 @@ jobs:
               echo "IMAGE_NAME=stg-scambetfront" >> $GITHUB_ENV
           fi
           echo "FULL_IMAGE=${REPO_PATH}/${IMAGE_NAME}" >> $GITHUB_ENV
-          fi
-          echo "Using image: $GH_REPO"
 
       - name: 'Login to GitHub Container Registry'
         uses: docker/login-action@v1
