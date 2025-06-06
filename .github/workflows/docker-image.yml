@@ -26,9 +26,9 @@ jobs:
       - name: Set Docker Repo
         run: |
           if [ "${{ github.ref }}" == 'refs/heads/master' ]; then
-              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/ci-cd-flask" >> $GITHUB_ENV
+              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/prd.scambetfront" >> $GITHUB_ENV
           elif [ "${{ github.ref }}" == 'refs/heads/develop' ]; then
-              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/dev-ci-cd-flask" >> $GITHUB_ENV
+              echo "DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/stg.scambetfront" >> $GITHUB_ENV
           fi
 
 

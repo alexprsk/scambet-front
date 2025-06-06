@@ -17,9 +17,6 @@ export default function BetslipView({
 
 
 
-
-
-
   const handlePlaceBet = (selections, stake) => {
 
     console.log(hasDuplicates, { selections, "stake": stake })
