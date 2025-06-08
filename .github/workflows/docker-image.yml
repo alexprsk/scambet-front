@@ -79,10 +79,28 @@
     Deploy-New-Fe-Version:
       runs-on: ubuntu-latest
       needs: build-and-push
+
       steps:
         - name: Checkout 
           uses: actions/checkout@v4
 
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v4.1.0
+          with:
+            audience: sts.amazonaws.com.cn
+            aws-region: eu-central-1
+            role-to-assume: arn:aws-cn:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-role-to-EC2
+
+        - name: Get Runner IP Address
+          id: ip
+          uses: haythem/public-ip@v1.2
+        - name: whitelist runner ip address
+          run: |
+            aws ec2 authorize-security-group-ingress \
+              --group-id ${{ secrets.AWS_SG_GROUP_ID }} \
+              --protocol tcp \
+              --port 22 \
+              --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
         - name: Upload image to EC2 and reload container
           env:
@@ -98,6 +116,17 @@
               sudo docker compose up -d
               docker image prune --force
             EOF
+            
+        - name: Revoke Runner IP Address
+          if: always()  # Ensures this runs even if previous steps fail
+          run: |
+            aws ec2 revoke-security-group-ingress \
+              --group-id ${{ secrets.AWS_SG_GROUP_ID }} \
+              --protocol tcp \
+              --port 22 \
+              --cidr ${{ steps.ip.outputs.ipv4 }}/32            
+
+        
 
         - name: Cleanup SSH key
           run: rm -f temp_ssh_key.pem
