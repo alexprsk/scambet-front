@@ -37,9 +37,9 @@
             echo "GH_REPO_LOWER=ghcr.io/$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
             if [[ "${GITHUB_REF##*/}" == "master" ]]; then
-              echo "GH_REPO=$GH_REPO_LOWER/prd.scambetfront" >> $GITHUB_ENV
+              echo "GH_REPO=${GH_REPO_LOWER}/prd.scambetfront" >> $GITHUB_ENV
             elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
-              echo "GH_REPO=$GH_REPO_LOWER/stg.scambetfront" >> $GITHUB_ENV
+              echo "GH_REPO=${GH_REPO_LOWER}/stg.scambetfront" >> $GITHUB_ENV
             fi
 
         - name: Login to GitHub Container Registry
