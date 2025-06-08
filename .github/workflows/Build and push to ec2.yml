@@ -85,11 +85,12 @@
           uses: actions/checkout@v4
 
         - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v4.1.0
+          uses: aws-actions/configure-aws-credentials@v4
           with:
-            audience: sts.amazonaws.com
             aws-region: eu-central-1
             role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-role-to-EC2
+            role-session-name: FrontendDeployment
+            audience: sts.amazonaws.com
 
         - name: Get Runner IP Address
           id: ip
