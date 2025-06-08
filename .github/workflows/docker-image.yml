@@ -16,6 +16,8 @@
   jobs:
     build-and-push:
       runs-on: ubuntu-latest
+      outputs:
+        gh_repo: ${{ steps.export_repo.outputs.gh_repo }}
         
       steps:
         - name: Code Checkout
@@ -70,6 +72,7 @@
             docker push $GH_REPO:latest
 
         - name: Export GH_REPO for use in next job
+          id: export_repo
           run: |
             echo "gh_repo=$GH_REPO" >> $GITHUB_OUTPUT
 
@@ -82,15 +85,18 @@
 
 
         - name: Upload image to EC2 and reload container
+          env:
+            GH_REPO: ${{ needs.build-and-push.outputs.gh_repo }}
           run: |
             echo "${{ secrets.EC2_SSH_KEY }}" > temp_ssh_key.pem
             chmod 600 temp_ssh_key.pem
 
             ssh -i temp_ssh_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-              sudo docker pull ghcr.io/alexprsk/prd.scambetfront:latest
+              sudo docker pull $GH_REPO:latest
               sudo docker stop root-scambetfront-1 || true
               sudo docker rm root-scambetfront-1 || true
               sudo docker compose up -d
+              docker image prune --force
             EOF
 
         - name: Cleanup SSH key
