@@ -89,7 +89,7 @@
           with:
             audience: sts.amazonaws.com.cn
             aws-region: eu-central-1
-            role-to-assume: arn:aws-cn:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-role-to-EC2
+            role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-role-to-EC2
 
         - name: Get Runner IP Address
           id: ip
