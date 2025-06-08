@@ -22,15 +22,9 @@
           uses: actions/checkout@v4
           
         - name: build-npm-action
-          run: npm install && npm run build
-        
-        - name: Upload frontend build artifacts
-          uses: actions/upload-artifact@v4
-          with:
-            name: frontend-dist
-            path: dist
-
-                    
+          run: |
+            npm install
+            PUBLIC_URL=/ npm run build  # Forces absolute paths (e.g., `/static/js/file.js`)
 
         - name: Set Lowercase Registry Path
           id: set_lowercase
@@ -86,23 +80,17 @@
         - name: Checkout 
           uses: actions/checkout@v4
 
-        - name: Download build artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: frontend-dist
-            path: dist
 
         - name: Upload dist to EC2 and reload nginx
           run: |
             echo "${{ secrets.EC2_SSH_KEY }}" > temp_ssh_key.pem
             chmod 600 temp_ssh_key.pem
 
-            scp -i temp_ssh_key.pem -o StrictHostKeyChecking=no -r dist/* ubuntu@${{ secrets.EC2_HOST }}:/tmp/scambet_dist
-
             ssh -i temp_ssh_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-              sudo rm -rf /var/www/html/*
-              sudo mv /tmp/scambet_dist/* /var/www/html/
-              sudo systemctl reload nginx
+              sudo docker pull ghcr.io/alexprsk/prd.scambetfront:latest
+              sudo docker stop root-scambetfront-1 || true
+              sudo docker rm root-scambetfront-1 || true
+              sudo docker compose up -d
             EOF
 
         - name: Cleanup SSH key
