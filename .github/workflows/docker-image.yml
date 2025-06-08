@@ -1,98 +1,135 @@
-name: Build Frontend and Push Docker Image
+  name: Build Frontend and Push Docker Image
 
-run-name: Build and Push from branch ${{ github.ref_name }} by @${{ github.actor }}
+  permissions:
+    id-token: write  
+    contents: read
 
+  run-name: Build and Push from branch ${{ github.ref_name }} by @${{ github.actor }}
 
+  on:
+    push:
+      branches:
+        - master
+        - staging
+    workflow_dispatch:
 
-  
-
-on:
-  push:
-    branches:
-      - master
-      - staging
-  workflow_dispatch:
-
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-      
-    steps:
-      - name: Code Checkout
-        uses: actions/checkout@v4
+  jobs:
+    build-and-push:
+      runs-on: ubuntu-latest
         
-      - name: build-npm-action
-        run :  npm install && npm run build
-
-      - name: Set lowercase repository
-        run: |
-          echo "GH_REPO_LOWER=ghcr.io/$(echo ${{github.actor}} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV        
-
-      
-      - name: Set Github Registry Repo
-        run: |
-          if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/prd.scambetfront" >> $GITHUB_ENV
-          elif [ "$GITHUB_REF" == "refs/heads/staging" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/stg.scambetfront" >> $GITHUB_ENV
-          fi
-          echo "Using image: $GH_REPO"
-
-      - name: 'Login to GitHub Container Registry'
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{github.actor}}
-          password: ${{secrets.CR_PAT}}
-
-
-      - name: 'Build Inventory Image'
-        run: |
-          echo "Building and pushing image: $GR_REPO:latest"
-          docker build -t $GH_REPO:latest .
-          docker push $GH_REPO:latest
-
-      - name: Run Cleanup Script
-        run:  echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
-
-
-      - name: Generate and display summary
-        run: |
-          echo "### 🚀 Docker Image Build and Push Summary 🚀" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
-          echo "- **Docker Image Name**: \`$DOCKER_REPO:${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Latest Tag**: \`$DOCKER_REPO:latest\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Run Number**: \`${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Steps Completed:" >> $GITHUB_STEP_SUMMARY
-          echo "1. ✅ Code checkout" >> $GITHUB_STEP_SUMMARY
-          echo "2. ✅ Python setup" >> $GITHUB_STEP_SUMMARY
-          echo "3. ✅ Dependencies installed" >> $GITHUB_STEP_SUMMARY
-          echo "4. ✅ Unit tests passed" >> $GITHUB_STEP_SUMMARY
-          echo "5. ✅ Docker image built" >> $GITHUB_STEP_SUMMARY
-          echo "6. ✅ Docker image pushed" >> $GITHUB_STEP_SUMMARY
-          echo "7. ✅ Run Cleanup Script" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Deleted Docker Tags" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-          echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "### Next Steps:" >> $GITHUB_STEP_SUMMARY
-          echo "- Pull the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker pull $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Pull the latest image:" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker pull $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Run the Docker image (specific version):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker run -p 5000:5000 $DOCKER_REPO:${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "- Run the Docker image (latest):" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "  docker run -p 5000:5000 $DOCKER_REPO:latest" >> $GITHUB_STEP_SUMMARY
-          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+      steps:
+        - name: Code Checkout
+          uses: actions/checkout@v4
           
+        - name: build-npm-action
+          run: npm install && npm run build
+        
+        - name: Upload frontend build artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: frontend-dist
+            path: dist
+
+                    
+
+        - name: Set Lowercase Registry Path
+          id: set_lowercase
+          run: |
+            # Convert GitHub username to lowercase and set GH_REPO_LOWER
+            GH_REPO_LOWER="ghcr.io/$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')"
+            echo "GH_REPO_LOWER=${GH_REPO_LOWER}" >> $GITHUB_ENV
+            echo "Set GH_REPO_LOWER=${GH_REPO_LOWER}"  # Debugging
+
+        - name: Set Target Repo Based on Branch
+          id: set_repo
+          run: |
+            # Check if GH_REPO_LOWER is set
+            if [ -z "${GH_REPO_LOWER}" ]; then
+              echo "Error: GH_REPO_LOWER is not set!"
+              exit 1
+            fi
+
+
+            if [[ "${{ github.ref_name }}" == "master" ]]; then
+              GH_REPO="${GH_REPO_LOWER}/prd.scambetfront"
+            elif [[ "${{ github.ref_name }}" == "staging" ]]; then
+              GH_REPO="${GH_REPO_LOWER}/stg.scambetfront"
+            else
+              echo "Unknown branch, exiting."
+              exit 1
+            fi
+
+            echo "GH_REPO=${GH_REPO}" >> $GITHUB_ENV
+            echo "Set GH_REPO=${GH_REPO}"
+
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v1
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.CR_PAT }}
+
+        - name: Build and Push Docker Image
+          run: |
+            echo "Building and pushing image: $GH_REPO:latest"
+            docker build -t $GH_REPO:latest .
+            docker push $GH_REPO:latest
+
+        - name: Export GH_REPO for use in next job
+          run: |
+            echo "gh_repo=$GH_REPO" >> $GITHUB_OUTPUT
+
+    Deploy-New-Fe-Version:
+      runs-on: ubuntu-latest
+      needs: build-and-push
+      steps:
+        - name: Checkout 
+          uses: actions/checkout@v4
+
+        - name: Download build artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: frontend-dist
+            path: dist
+
+        - name: Upload dist to EC2 and reload nginx
+          run: |
+            echo "${{ secrets.EC2_SSH_KEY }}" > temp_ssh_key.pem
+            chmod 600 temp_ssh_key.pem
+
+            scp -i temp_ssh_key.pem -o StrictHostKeyChecking=no -r dist/* ubuntu@${{ secrets.EC2_HOST }}:/tmp/scambet_dist
+
+            ssh -i temp_ssh_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+              sudo rm -rf /var/www/html/*
+              sudo mv /tmp/scambet_dist/* /var/www/html/
+              sudo systemctl reload nginx
+            EOF
+
+        - name: Cleanup SSH key
+          run: rm -f temp_ssh_key.pem
+
+        - name: Generate and display summary
+          run: |
+            echo "### 🚀 Docker Image Build and Push Summary 🚀" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+            echo "- **Docker Image Name**: \`${{ needs.build-and-push.outputs.gh_repo }}:latest\`" >> $GITHUB_STEP_SUMMARY
+            echo "- **Latest Tag**: \`${{ needs.build-and-push.outputs.gh_repo }}:latest\`" >> $GITHUB_STEP_SUMMARY
+            echo "- **Run Number**: \`${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Steps Completed:" >> $GITHUB_STEP_SUMMARY
+            echo "1. ✅ Code checkout" >> $GITHUB_STEP_SUMMARY
+            echo "2. ✅ NPM Build" >> $GITHUB_STEP_SUMMARY
+            echo "3. ✅ Artifact Upload" >> $GITHUB_STEP_SUMMARY
+            echo "4. ✅ Docker image built and pushed" >> $GITHUB_STEP_SUMMARY
+            echo "5. ✅ Uploaded to EC2 and Nginx reloaded" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "## Docker Commands" >> $GITHUB_STEP_SUMMARY
+            echo "### Pull the latest image:" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+            echo "docker pull ${{ needs.build-and-push.outputs.gh_repo }}:latest" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            echo "### Run the latest image:" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+            echo "docker run -p 80:80 ${{ needs.build-and-push.outputs.gh_repo }}:latest" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`"
