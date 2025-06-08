@@ -34,13 +34,15 @@
 
         - name: Set Github Registry Repo
           run: |
-            echo "GH_REPO_LOWER=ghcr.io/$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+            GH_REPO_LOWER="ghcr.io/$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')"
+            echo "GH_REPO_LOWER=${GH_REPO_LOWER}" >> $GITHUB_ENV
 
             if [[ "${GITHUB_REF##*/}" == "master" ]]; then
               echo "GH_REPO=${GH_REPO_LOWER}/prd.scambetfront" >> $GITHUB_ENV
             elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
               echo "GH_REPO=${GH_REPO_LOWER}/stg.scambetfront" >> $GITHUB_ENV
             fi
+            echo "GH_REPO=${GH_REPO}" >> $GITHUB_ENV 
 
         - name: Login to GitHub Container Registry
           uses: docker/login-action@v1
