@@ -32,9 +32,9 @@ jobs:
       - name: Set Github Registry Repo
         run: |
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/prd.scambetfront" >> $GITHUB_ENV
+              echo "GH_REPO=${GH_REPO_LOWER}/prd.scambetfront" >> $GITHUB_ENV
           elif [ "$GITHUB_REF" == "refs/heads/staging" ]; then
-              echo "GH_REPO=$GH_REPO_LOWER/stg.scambetfront" >> $GITHUB_ENV
+              echo "GH_REPO=${GH_REPO_LOWER}/stg.scambetfront" >> $GITHUB_ENV
           fi
           echo "Using image: $GH_REPO"
 
