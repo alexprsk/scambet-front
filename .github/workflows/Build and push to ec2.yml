@@ -112,8 +112,8 @@
 
             ssh -i temp_ssh_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
               sudo docker pull $GH_REPO:latest
-              sudo docker stop root-scambetfront-1 || true
-              sudo docker rm root-scambetfront-1 || true
+              sudo docker stop ubuntu-scambetfront-1 || true
+              sudo docker rm ubuntu-scambetfront-1 || true
               sudo docker compose up -d
               docker image prune --force
             EOF
