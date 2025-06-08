@@ -32,17 +32,35 @@
 
                     
 
-        - name: Set Github Registry Repo
+        - name: Set Lowercase Registry Path
+          id: set_lowercase
           run: |
+            # Convert GitHub username to lowercase and set GH_REPO_LOWER
             GH_REPO_LOWER="ghcr.io/$(echo ${{ github.actor }} | tr '[:upper:]' '[:lower:]')"
             echo "GH_REPO_LOWER=${GH_REPO_LOWER}" >> $GITHUB_ENV
+            echo "Set GH_REPO_LOWER=${GH_REPO_LOWER}"  # Debugging
 
-            if [[ "${GITHUB_REF##*/}" == "master" ]]; then
-              echo "GH_REPO=${GH_REPO_LOWER}/prd.scambetfront" >> $GITHUB_ENV
-            elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
-              echo "GH_REPO=${GH_REPO_LOWER}/stg.scambetfront" >> $GITHUB_ENV
+        - name: Set Target Repo Based on Branch
+          id: set_repo
+          run: |
+            # Check if GH_REPO_LOWER is set
+            if [ -z "${GH_REPO_LOWER}" ]; then
+              echo "Error: GH_REPO_LOWER is not set!"
+              exit 1
             fi
-            echo "GH_REPO=${GH_REPO}" >> $GITHUB_ENV 
+
+
+            if [[ "${{ github.ref_name }}" == "master" ]]; then
+              GH_REPO="${GH_REPO_LOWER}/prd.scambetfront"
+            elif [[ "${{ github.ref_name }}" == "staging" ]]; then
+              GH_REPO="${GH_REPO_LOWER}/stg.scambetfront"
+            else
+              echo "Unknown branch, exiting."
+              exit 1
+            fi
+
+            echo "GH_REPO=${GH_REPO}" >> $GITHUB_ENV
+            echo "Set GH_REPO=${GH_REPO}"
 
         - name: Login to GitHub Container Registry
           uses: docker/login-action@v1
