@@ -31,7 +31,6 @@ export default function BetslipButton({
             await handlePlaceBet(selections, stake, setIsPlaced, user_id);
         } catch (err) {
             setError(err.message);
-            alert(error)
         }
     };
 
