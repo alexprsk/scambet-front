@@ -13,6 +13,7 @@
   .scrollbar::-webkit-scrollbar-track {
     border-radius: 100vh;
     background: #708469;
+    scrollbar-gutter: stable;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {

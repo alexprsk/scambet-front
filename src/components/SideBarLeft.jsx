@@ -1,5 +1,4 @@
-import { SoccerBallIcon, BasketballIcon, TennisBallIcon, BaseballIcon, AmericanFootballIcon } from "../constants/svg";
-
+import { Link } from "react-router-dom";
 
 
 export default function SideBarLeft({ sports,icons }) {
@@ -11,10 +10,10 @@ export default function SideBarLeft({ sports,icons }) {
         <nav>
           <ul className="space-y-2">
             {sports.map((sport, index) => (<li key={index}>
-              <a href={`/prelive/${sport.sport.toLowerCase()}`} className="flex items-center p-2 hover:bg-slate-500 rounded transition">
+              <Link to={`/prelive/${sport.sport.toLowerCase()}`} className="flex items-center p-2 hover:bg-slate-500 rounded transition">
                 {icons[sport.sport]}<span className="p-1"></span>
                 {sport.sport}
-              </a>
+              </Link>
             </li>))}
             
             

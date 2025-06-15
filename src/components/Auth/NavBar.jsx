@@ -1,7 +1,7 @@
 import ScambetLogo from '../../assets/ScambetLogo.jpg'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import { HandleLogout } from './http';
 
 export default function NavBar({ onLoginClick, onRegistrationClick}) {
@@ -17,22 +17,47 @@ export default function NavBar({ onLoginClick, onRegistrationClick}) {
   
   return (
     
-<nav className="bg-gradient-to-r from-gray-800 to-dark-gray-800 border-b border-emerald-300 shadow-lg shadow-green-500/20">
+<nav className="bg-gray-900 text-emerald-400">
   <div className="relative flex h-12 items-center justify-between px-4">
     
     {/* Logo and Navigation Links */}
-    <div className="flex items-center space-x-6">
-      <a href="/">
+    <div className="flex items-center space-x-4">
+      <Link to="/upcoming-events">
         <img
           src={ScambetLogo}
           alt="Scambet logo"
-          className="h-12" // Adjust size as needed
+          className="h-10" // Adjust size as needed
         />
-      </a>
+      </Link>
       <div id="NavPages" className="flex items-center space-x-6 text-white text-xl pt-1">
-        <a href="/casino">Casino</a>
-        <a href="/Live-Betting">Live Betting</a>
-        <a href="/Live-Betting">Poker</a>
+<Link
+  to="/upcoming-events"
+  className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-full"
+>
+  Casino
+</Link>
+
+<Link
+  to="/upcoming-events"
+  className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-full"
+>
+  Pre-Live
+</Link>
+
+<Link
+  to="/upcoming-events"
+  className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-full"
+>
+  Live Betting
+</Link>
+
+<Link
+  to="/upcoming-events"
+  className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-full"
+>
+  Poker
+</Link>
+
         
       </div>
     </div>

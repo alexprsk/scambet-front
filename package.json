@@ -15,9 +15,11 @@
     "@tailwindcss/vite": "^4.1.7",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
+    "framer-motion": "^12.18.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.2",
     "redux": "^5.0.1",
     "swiper": "^11.2.8",
     "tailwindcss": "^4.1.7"
