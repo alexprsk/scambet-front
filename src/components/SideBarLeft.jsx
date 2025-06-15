@@ -13,7 +13,7 @@ export default function SideBarLeft({ sports }) {
 };
 
   return (
-    <div className="w-52 bg-inherit text-white p-4 hidden md:block border border-gray-500 rounded">
+    <div className="w-52 bg-inherit text-white pt-4  pl-2 hidden md:block border border-gray-500 rounded">
       <div className="top-16">
         <nav>
           <ul className="space-y-2">
