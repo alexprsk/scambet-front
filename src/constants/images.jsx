@@ -11,3 +11,4 @@ export const IMAGES = [
   { src: FishAround },
   { src: SurfDog }
 ];
+

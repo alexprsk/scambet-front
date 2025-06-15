@@ -10,6 +10,7 @@ import { IMAGES } from './constants/images.jsx';
 import AuthWrapper from './components/Auth/AuthWrapper.jsx';
 import { useFetchMarkets } from './hooks/useFetchMarkets.js';
 import { useOpenBets } from './hooks/useOpenBets.js';
+import { SPORTS } from './constants/sportslists.jsx';
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
       <AuthWrapper />
 
       <div className="relative min-h-screen flex  ">
-        <SideBarLeft />
+        <SideBarLeft sports={SPORTS}/>
         <div className="flex-1 flex-col">
           {/* Carousel */}
           <div className="carousel_card m-8 h-44 flex flex-row rounded-xl">
