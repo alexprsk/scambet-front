@@ -38,3 +38,12 @@ export const AmericanFootballIcon = () => (
   </svg>
 );
 
+
+
+  export const ICONS = {
+  Soccer: <SoccerBallIcon />,
+  Basketball: <BasketballIcon />,
+  Tennis: <TennisBallIcon />,
+  Baseball: <BaseballIcon />,
+  "American Football": <AmericanFootballIcon  />,
+};

@@ -2,15 +2,8 @@ import { SoccerBallIcon, BasketballIcon, TennisBallIcon, BaseballIcon, AmericanF
 
 
 
-export default function SideBarLeft({ sports }) {
+export default function SideBarLeft({ sports,icons }) {
 
-  const ICONS = {
-  Soccer: <SoccerBallIcon />,
-  Basketball: <BasketballIcon />,
-  Tennis: <TennisBallIcon />,
-  Baseball: <BaseballIcon />,
-  "American Football": <AmericanFootballIcon  />,
-};
 
   return (
     <div className="w-52 bg-inherit text-white pt-4  pl-2 hidden md:block border border-gray-500 rounded">
@@ -19,7 +12,7 @@ export default function SideBarLeft({ sports }) {
           <ul className="space-y-2">
             {sports.map((sport, index) => (<li key={index}>
               <a href={`/prelive/${sport.sport.toLowerCase()}`} className="flex items-center p-2 hover:bg-slate-500 rounded transition">
-                {ICONS[sport.sport]}<span className="p-1"></span>
+                {icons[sport.sport]}<span className="p-1"></span>
                 {sport.sport}
               </a>
             </li>))}
