@@ -9,8 +9,7 @@ function PreLivePage() {
   const eventsBySport = useFetchEvents();
   const openbets = useOpenBets();
 
-
-  const normalizedSport = sport 
+  const normalizedSportKey = sport 
     ? sport.replace(/\s/g, '').toLowerCase()
     : null;
 
@@ -24,62 +23,50 @@ function PreLivePage() {
   }
 
 
-  const filteredEventsBySport = normalizedSport
-    ? { [normalizedSport]: eventsBySport[normalizedSport] || [] }
-    : eventsBySport;
-
-
-  const formatSportTitle = (key) => {
-
-    if (eventsBySport[key]?.length > 0) {
-      return eventsBySport[key][0].sport_title;
-    }
-
-
-    const sportTitles = {
-      baseball: 'Baseball',
-      americanfootball: 'American Football',
-      basketball: 'Basketball',
-      soccer: 'Soccer',
-      tennis: 'Tennis'
+  const getDisplayTitle = () => {
+    if (!sport) return 'All Sports'; 
+    
+ 
+    const titleMap = {
+      'americanfootball': 'American Football',
+      'baseball': 'Baseball',
+      'basketball': 'Basketball',
+      'soccer': 'Soccer',
+      'tennis': 'Tennis'
     };
-
-    return sportTitles[key] || key
-      .replace(/_/g, ' ')
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      .toLowerCase()
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+    
+    return titleMap[normalizedSportKey] || 
+           sport.replace(/\b\w/g, c => c.toUpperCase()); 
   };
+
+
+  const currentEvents = normalizedSportKey 
+    ? eventsBySport[normalizedSportKey] || []
+    : Object.values(eventsBySport).flat();
 
   return (
     <>
       <div className="events_outside_container relative flex">
         <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10">
-          <div
-            className="events_card flex-1 flex-col rounded-md bg-gray-800 shadow-2xl"
-            id="events_card"
-          >
-            {Object.entries(filteredEventsBySport).map(([key, events]) => (
-              <div key={key}>
-                <h2 className="text-white text-xl font-bold mb-4">
-                  {formatSportTitle(key)}
-                </h2>
-                {events.length === 0 ? (
-                  <p className="text-white p-2">No events available</p>
-                ) : (
-                  events.map((event) => (
-                    <PreLiveEvents
-                      key={event.id}
-                      id={event.id}
-                      sport={event.sport_key}
-                      hometeam={event.home_team}
-                      awayteam={event.away_team}
-                      startTime={new Date(event.commence_time).toLocaleString()}
-                    />
-                  ))
-                )}
-              </div>
-            ))}
+          <div className="events_card flex-1 flex-col rounded-md bg-gray-800 shadow-2xl">
+            <h2 className="text-white text-xl font-bold mb-4">
+              {getDisplayTitle()}
+            </h2>
+            
+            {currentEvents.length === 0 ? (
+              <p className="text-white p-2">No events available</p>
+            ) : (
+              currentEvents.map((event) => (
+                <PreLiveEvents
+                  key={event.id}
+                  id={event.id}
+                  sport={event.sport_key}
+                  hometeam={event.home_team}
+                  awayteam={event.away_team}
+                  startTime={new Date(event.commence_time).toLocaleString()}
+                />
+              ))
+            )}
           </div>
         </div>
         <Betslip openbets={openbets} />
