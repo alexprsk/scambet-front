@@ -6,6 +6,7 @@ import UpcomingPage from './routes/UpcomingPage.jsx';
 import PreLivePage from './routes/PrelivePage.jsx';
 import Layout from './routes/Layout.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
+import { useFetchMarkets } from './hooks/useFetchMarkets.js';
 
 const router = createBrowserRouter([
   {
