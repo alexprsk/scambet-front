@@ -9,15 +9,15 @@ export const useFetchEvents = () => {
         const res = await fetch('/api/sportsbook/events');
         const json = await res.json();
 
-        // ✅ No need to re-map — just extract the events object
+
         setEvents(json.events);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
     };
 
-    fetchData(); // Initial fetch
-    const intervalId = setInterval(fetchData, 8000); // Poll every 8 seconds
+    fetchData();
+    const intervalId = setInterval(fetchData, 8000); 
 
     return () => clearInterval(intervalId);
   }, []);
