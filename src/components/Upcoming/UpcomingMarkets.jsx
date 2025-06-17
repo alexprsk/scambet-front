@@ -32,7 +32,7 @@ export function PreLiveMarketsTop() {
 
 
 
-export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds }) {
+export function UpcomingMarkets({ id, sport, startTime, hometeam, awayteam, odds }) {
 
   const formatGreekTime = (isoString) => {
           try {
@@ -56,9 +56,9 @@ export function PreLiveMarkets({ id, sport, startTime, hometeam, awayteam, odds 
 
 
   const marketselections = [
-    { label: '1', value: hometeam, odd: odds.find(o => o.name === hometeam)?.price, eventId: id, startTime  },
-    { label: 'X', value: 'Draw', odd: odds.find(o => o.name === 'Draw')?.price, eventId: id, startTime },
-    { label: '2', value: awayteam, odd: odds.find(o => o.name === awayteam)?.price, eventId: id, startTime }
+    { label: '1', value: hometeam, odd: (odds || []).find(o => o.name === hometeam)?.price, eventId: id, startTime  },
+    { label: 'X', value: 'Draw', odd: (odds || []).find(o => o.name === 'Draw')?.price, eventId: id, startTime },
+    { label: '2', value: awayteam, odd: (odds || []).find(o => o.name === awayteam)?.price, eventId: id, startTime }
   ].filter(Boolean);
 
   const handleSelection = (selection) => {

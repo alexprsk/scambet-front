@@ -38,7 +38,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick}) {
 </Link>
 
 <Link
-  to="/upcoming-events"
+  to="/prelive"
   className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-full"
 >
   Pre-Live
