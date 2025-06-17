@@ -6,7 +6,7 @@ import UpcomingPage from './routes/UpcomingPage.jsx';
 import PreLivePage from './routes/PrelivePage.jsx';
 import Layout from './routes/Layout.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
-import { useFetchMarkets } from './hooks/useFetchMarkets.js';
+import { useFetchEvents } from './hooks/useFetchEvents.js';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  useFetchMarkets();
+  useFetchEvents();
   return <RouterProvider router={router} />;
 }
 
