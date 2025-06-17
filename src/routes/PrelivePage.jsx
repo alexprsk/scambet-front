@@ -1,17 +1,18 @@
 import { useParams } from 'react-router-dom';
-
-import { useFetchMarkets } from '../hooks/useFetchMarkets.js';
 import { useOpenBets } from '../hooks/useOpenBets.js';
 import { useFetchEvents } from '../hooks/useFetchEvents.js';
-
 import PreLiveEvents from '../components/PreLive/PreLiveEvents.jsx';
 import Betslip from '../components/Betslip/BetSlip.jsx';
 
 function PreLivePage() {
   const { sport } = useParams();
-
   const eventsBySport = useFetchEvents();
   const openbets = useOpenBets();
+
+
+  const normalizedSport = sport 
+    ? sport.replace(/\s/g, '').toLowerCase()
+    : null;
 
   if (!eventsBySport) {
     return (
@@ -23,12 +24,32 @@ function PreLivePage() {
   }
 
 
-
-  const sportKey = sport 
-
-  const filteredEventsBySport = sportKey
-    ? { [sportKey]: eventsBySport[sportKey] || [] }
+  const filteredEventsBySport = normalizedSport
+    ? { [normalizedSport]: eventsBySport[normalizedSport] || [] }
     : eventsBySport;
+
+
+  const formatSportTitle = (key) => {
+
+    if (eventsBySport[key]?.length > 0) {
+      return eventsBySport[key][0].sport_title;
+    }
+
+
+    const sportTitles = {
+      baseball: 'Baseball',
+      americanfootball: 'American Football',
+      basketball: 'Basketball',
+      soccer: 'Soccer',
+      tennis: 'Tennis'
+    };
+
+    return sportTitles[key] || key
+      .replace(/_/g, ' ')
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .toLowerCase()
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+  };
 
   return (
     <>
@@ -41,12 +62,7 @@ function PreLivePage() {
             {Object.entries(filteredEventsBySport).map(([key, events]) => (
               <div key={key}>
                 <h2 className="text-white text-xl font-bold mb-4">
-                  {key
-                    .replace(/_/g, ' ')                   
-                    .replace(/([a-z])([A-Z])/g, '$1 $2')  
-                    .toLowerCase()
-                    .replace(/\b\w/g, (c) => c.toUpperCase()) 
-                  }
+                  {formatSportTitle(key)}
                 </h2>
                 {events.length === 0 ? (
                   <p className="text-white p-2">No events available</p>
