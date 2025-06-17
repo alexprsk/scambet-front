@@ -21,6 +21,7 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+  useFetchMarkets();
   return <RouterProvider router={router} />;
 }
 
