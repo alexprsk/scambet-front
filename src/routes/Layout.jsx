@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-
 import AuthWrapper from '../components/Auth/AuthWrapper.jsx';
 import SideBarLeft from '../components/SideBarLeft.jsx';
 import Footer from '../components/Footer.jsx';
@@ -13,7 +12,7 @@ function Layout() {
       <div className="relative min-h-screen flex">
         <SideBarLeft sports={SPORTS} icons={ICONS} />
         <div className="flex-1 flex-col">
-          <Outlet /> {/* Render child routes here */}
+          <Outlet /> 
           <Footer />
         </div>
       </div>

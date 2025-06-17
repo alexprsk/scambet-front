@@ -2,7 +2,8 @@ import './index.css';
 import './App.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PrelivePage from './routes/PrelivePage.jsx';
+import UpcomingPage from './routes/UpcomingPage.jsx';
+import PreLivePage from './routes/PrelivePage.jsx';
 import Layout from './routes/Layout.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
 
@@ -10,33 +11,15 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
-
-      {
-        index: true,
-        element: <PrelivePage />
-      },
-      {
-        path: 'upcoming-events',
-        element: <PrelivePage />
-      },
-      {
-        path: 'prelive/soccer',
-        element: <PrelivePage />
-      },
-      {
-        path: 'prelive/basketball',
-        element: <PrelivePage />
-      },
-      {
-        path: 'prelive/baseball',
-        element: <PrelivePage />
-      }           
-    ]
-  }
+      { index: true, element: <UpcomingPage /> },
+      { path: 'upcoming-events', element: <UpcomingPage /> },
+      // Single route with optional sport param
+      { path: 'prelive/:sport?', element: <PreLivePage /> },
+    ],
+  },
 ]);
-
 function App() {
   return <RouterProvider router={router} />;
 }
