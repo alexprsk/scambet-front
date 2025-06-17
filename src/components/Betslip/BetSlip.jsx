@@ -40,7 +40,7 @@ return (
     <div className='flex-row flex h-16'>
       <button
         onClick={() => setSelectedBetslip(true)}
-        className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 ${selectedBetslip ? 'dark:bg-emerald-500 ' : 'dark:hover:bg-emerald-700'} cursor-pointer rounded-tl-xl`}
+        className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b border-r pb-2 ${selectedBetslip ? 'bg-emerald-500 ' : 'hover:bg-emerald-700'} cursor-pointer rounded-tl-xl`}
       >
         Betslip
         <span
@@ -50,7 +50,7 @@ return (
           {selections.length}
         </span>
       </button>
-      <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip ? "dark:hover:bg-emerald-700" : "dark:bg-emerald-500"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
+      <button onClick={() => setSelectedBetslip(false)} className={`flex flex-1 items-center justify-center text-xl font-bold mb-4 border-b pb-2  ${selectedBetslip ? "hover:bg-emerald-700" : "bg-emerald-500"} cursor-pointer rounded-tr-xl`}>Open Bets</button>
     </div>
     <div className="top-16 px-4 pb-4 ">
 
