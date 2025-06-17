@@ -6,7 +6,7 @@ export const useFetchEvents = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:8001/api/games');
+        const res = await fetch('/api/sportsbook/events');
         const json = await res.json();
 
         // ✅ No need to re-map — just extract the events object
