@@ -22,7 +22,9 @@ function PreLivePage() {
     );
   }
 
-  const sportKey = sport ? `${sport}_events` : null;
+
+
+  const sportKey = sport 
 
   const filteredEventsBySport = sportKey
     ? { [sportKey]: eventsBySport[sportKey] || [] }
@@ -39,7 +41,12 @@ function PreLivePage() {
             {Object.entries(filteredEventsBySport).map(([key, events]) => (
               <div key={key}>
                 <h2 className="text-white text-xl font-bold mb-4">
-                  {key.replace('_events', '').toUpperCase()}
+                  {key
+                    .replace(/_/g, ' ')                   
+                    .replace(/([a-z])([A-Z])/g, '$1 $2')  
+                    .toLowerCase()
+                    .replace(/\b\w/g, (c) => c.toUpperCase()) 
+                  }
                 </h2>
                 {events.length === 0 ? (
                   <p className="text-white p-2">No events available</p>
