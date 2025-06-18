@@ -3,7 +3,7 @@ import { useState  } from 'react';
 import BetslipButton from './BetslipButton';
 import BetslipView from './BetSlipView';
 import BetslipOpenBets from './BetslipOpenBets';
-
+import { useOpenBets } from '../../hooks/useOpenBets';
 
 
 
@@ -13,6 +13,14 @@ export default function Betslip( {openbets}) {
 const [stake, setStake] = useState('');
 const selections = useSelector((state) => state.betslip.selections);
 const [selectedBetslip, setSelectedBetslip] = useState(true)
+
+const { openBets, refetch: refetchOpenBets } = useOpenBets();
+
+  useEffect(() => {
+    if (!selectedBetslip) {
+      refetchOpenBets(); 
+    }
+  }, [selectedBetslip]);
 
 const calculatePotentialReturn = () => {
   if (!stake || selections.length === 0) return 0;
