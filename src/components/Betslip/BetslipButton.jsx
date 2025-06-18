@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
 import handlePlaceBet from './Betslip.api/handlePlaceBet.js'
+import { useOpenBets } from '../../hooks/useOpenBets.js';
 
 export default function BetslipButton({
     stake,
@@ -13,6 +14,7 @@ export default function BetslipButton({
     const [isPlaced, setIsPlaced] = useState(null);
     const [error, setError] = useState(null);
 
+    const loadOpenBets = fetchOpenBets();
 
         useEffect(() => {
         let timer;
@@ -29,6 +31,7 @@ export default function BetslipButton({
     const placeBet = async () => {
         try {
             await handlePlaceBet(selections, stake, setIsPlaced, user_id);
+            useOpenBets();
         } catch (err) {
             setError(err.message);
         }
