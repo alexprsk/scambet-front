@@ -14,7 +14,7 @@ export default function BetslipButton({
     const [isPlaced, setIsPlaced] = useState(null);
     const [error, setError] = useState(null);
 
-    const loadOpenBets = fetchOpenBets();
+        const { refetch: loadOpenBets } = useOpenBets();
 
         useEffect(() => {
         let timer;
@@ -31,7 +31,7 @@ export default function BetslipButton({
     const placeBet = async () => {
         try {
             await handlePlaceBet(selections, stake, setIsPlaced, user_id);
-            useOpenBets();
+             loadOpenBets();
         } catch (err) {
             setError(err.message);
         }
