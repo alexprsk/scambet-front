@@ -15,13 +15,16 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
     }
 
     try {
+        const authData = JSON.parse(localStorage.getItem("auth"));
+        const token = authData?.access_token;
+
         const response = await fetch('/api/sportsbook/place_bet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                userId: String(user_id),
                 stake,
                 selections,
                 status: "PENDING"
