@@ -19,7 +19,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
 
   const handleRefreshClick = async () => {
     const updatedBalance = await refreshBalance();
-    dispatch({ type: "SET_BALANCE", payload: updatedBalance.user_balance });
+    dispatch({ type: "SET_BALANCE", payload: updatedBalance.balance });
   }
 
   return (
