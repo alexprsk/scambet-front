@@ -65,12 +65,12 @@ export default function BetslipButton({
             {hasDuplicates ? <span className='h-5  block text-sm text-red-600'>Incompatible Selections</span> : <span className='invisible block h-5'> </span>}
 
             <div>
-                <button disabled={hasDuplicates || !(stake > 0)} onClick={placeBet}
+                <button disabled={hasDuplicates || !(stake > 0) || selections.length === 0} onClick={placeBet}
                     type="button"
-                    className={`w-full bg-emerald-600 hover:bg-emerald-400 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates || !(stake > 0) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`w-full bg-emerald-600 hover:bg-emerald-400 text-black font-semibold py-2 rounded transition duration-200 ${hasDuplicates || !(stake > 0) || selections.length === 0? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                 >
                     <div className="flex flex-col items-center leading-tight">
-                        <span className='font-bold text-md'>Place Bet {stake}</span>
+                        <span className='font-bold text-md'>Place Bet {stake}$C</span>
                         <span className="text-sm text-black/80">Return {potentialReturn}</span>
                     </div>
                 </button>
