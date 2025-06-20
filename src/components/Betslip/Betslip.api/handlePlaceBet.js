@@ -45,13 +45,7 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
 
         });
         setIsPlaced(true)
-        const fundsResponse = await fetch('/api/funds', {method: 'GET'  });
-
-        if (!fundsResponse.ok){
-            throw new Error("Failed to get user funds")
-        }
-
-        const userFunds = fundsResponse.json();
+        balance = balance - stake
 
     } catch (error) {
         setIsPlaced(false);
