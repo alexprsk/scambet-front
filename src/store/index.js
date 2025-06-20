@@ -90,6 +90,11 @@ const authStateReducer = (state = AuthState, action) => {
         authenticated: false,
         access_token: null
       };
+    case "SET_BALANCE":
+      return {
+        ...state,
+        balance: action.payload,
+      };
     default:
       return state;
   }
