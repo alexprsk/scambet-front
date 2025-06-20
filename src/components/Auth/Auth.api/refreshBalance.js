@@ -20,7 +20,7 @@ export default async function refreshBalance() {
         const balance = await response.json()
         console.log(balance)
 
-        return balance;
+        return balance.user_balance;
         
     }catch (error){
      console.log(error)
