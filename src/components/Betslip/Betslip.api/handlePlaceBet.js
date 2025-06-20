@@ -45,7 +45,7 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
 
         });
         setIsPlaced(true)
-        balance = balance - stake
+
 
     } catch (error) {
         setIsPlaced(false);

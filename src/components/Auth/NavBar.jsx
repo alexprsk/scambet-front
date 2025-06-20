@@ -85,7 +85,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick}) {
         id="userAuthenticatedBalance"
         className={`${authenticated? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer`}
       >
-        <p>{balance}$C</p>
+        <p>{(balance ?? 0).toFixed(2)}$C</p>
       </button>
 
 <button
