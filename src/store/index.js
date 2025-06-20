@@ -72,7 +72,7 @@ try {
 }
 
 
-const AuthState = { user_id: null, balance: null, authenticated: false };
+const AuthState = { user_id: null, balance: 0, authenticated: false };
 
 const authStateReducer = (state = AuthState, action) => {
   switch (action.type) {

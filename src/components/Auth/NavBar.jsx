@@ -18,6 +18,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
   };
 
   const handleRefreshClick = async () => {
+    const updatedBalance = await refreshBalance();
     if (updatedBalance !== null) {
     dispatch({ type: "SET_BALANCE", payload: updatedBalance });
   } else {
@@ -94,7 +95,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
             id="userAuthenticatedBalance"
             className={`${authenticated ? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer`}
           >
-            <p>{(balance ?? 0).toFixed(2)}$C</p>
+            <p>{Number(balance).toFixed(2)}$C</p>
           </button>
 
           <div className={`${authenticated ? "" : "hidden"} cursor-pointer` } onClick={handleRefreshClick}>
