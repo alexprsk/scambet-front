@@ -7,6 +7,7 @@ import { HandleLogout } from './http';
 export default function NavBar({ onLoginClick, onRegistrationClick}) {
   
     const authenticated = useSelector((state) => state.auth.authenticated);
+    const balance = useSelector((state) => state.auth.balance);
     const dispatch = useDispatch();
   
     const handleLogoutClick = async () => {
@@ -84,7 +85,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick}) {
         id="userAuthenticatedBalance"
         className={`${authenticated? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer`}
       >
-        <p>0.00$C</p>
+        <p>{balance}$C</p>
       </button>
 
 <button

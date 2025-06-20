@@ -19,14 +19,14 @@ function Login({ show, Hide }) {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const { access_token, user_id } = await HandleLogin(data);
+      const { access_token, user_id, balance } = await HandleLogin(data);
 
-      // You may extract user_id from token (if it's a JWT) or just use the username
       dispatch({
         type: 'Login',
         payload: {
           user_id : user_id,
-          access_token: access_token
+          access_token: access_token,
+          balance: balance
         }
       });
 

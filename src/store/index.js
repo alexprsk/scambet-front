@@ -52,7 +52,7 @@ const betslipReducer = (state = BetslipState, action) => {
 
 
 let persistedBetslip = BetslipState;
-let persistedAuth = { user_id: null, authenticated: false };
+let persistedAuth = { user_id: null, balance: null, authenticated: false };
 
 try {
   const stored = localStorage.getItem('betslip');
@@ -72,19 +72,21 @@ try {
 }
 
 
-const AuthState = { user_id: null, authenticated: false };
+const AuthState = { user_id: null, balance: null, authenticated: false };
 
 const authStateReducer = (state = AuthState, action) => {
   switch (action.type) {
     case "Login":
       return {
         user_id: action.payload.user_id,
+        balance: action.payload.balance,
         authenticated: true,
         access_token: action.payload.access_token
       };
     case "Logout":
       return {
         user_id: null,
+        balance:null,
         authenticated: false,
         access_token: null
       };

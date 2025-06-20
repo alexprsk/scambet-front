@@ -14,10 +14,10 @@ export default async function HandleLogin(data) {
     throw new Error(error.detail);
   }
 
-  const { access_token, user_id } = await response.json(); 
+  const { access_token, user_id, balance } = await response.json(); 
   document.cookie = `access_token=${access_token}; path=/`;
 
-  return { access_token, user_id }; // 
+  return { access_token, user_id, balance }; // 
 }
 
 
