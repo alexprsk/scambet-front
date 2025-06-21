@@ -5,7 +5,7 @@ export default function SideBarLeft({ sports,icons }) {
 
 
   return (
-    <div className="w-52 bg-inherit text-white pt-4  pl-2 hidden md:block border border-gray-500 rounded">
+    <div className="w-54 bg-gray-800 text-white pt-4  pl-2 hidden md:block rounded-xl">
       <div className="top-16">
         <nav>
           <ul className="space-y-2">
@@ -19,9 +19,6 @@ export default function SideBarLeft({ sports,icons }) {
             
           </ul>
         </nav>
-
-        <h2 className="text-xl font-bold mt-8 mb-4 border-b border-gray-500 pb-2">Live Events</h2>
-        
       </div>
     </div>
   );

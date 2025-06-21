@@ -89,20 +89,22 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
             />
           </svg>
 
-          <button
-            type="button"
-            id="userAuthenticatedBalance"
-            className={`${authenticated ? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 px-4 rounded transition duration-300 cursor-pointer`}
-          >
-            <p>{Number(balance).toFixed(2)}$C</p>
-          </button>
-
           <div className={`${authenticated ? "" : "hidden"} cursor-pointer`} onClick={handleRefreshClick}>
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
             </svg>
 
           </div>
+          
+          <button
+            type="button"
+            id="userAuthenticatedBalance"
+            className={`${authenticated ? "" : "hidden"} bg-transparent hover:bg-transparent text-white py-2 pr-4 rounded transition duration-300 cursor-pointer`}
+          >
+            <p>{Number(balance).toFixed(2)}$C</p>
+          </button>
+
+
 
           <button
             onClick={onRegistrationClick}

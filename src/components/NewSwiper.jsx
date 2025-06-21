@@ -17,7 +17,7 @@ export default function NewSwiper() {
     return (
         <> 
             <Swiper
-                slidesPerView={3.5}
+                slidesPerView={3.2}
                 centeredSlides={true}
                 spaceBetween={10}
                 grabCursor={true}

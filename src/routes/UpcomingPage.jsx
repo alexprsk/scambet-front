@@ -12,9 +12,8 @@ function UpcomingPage() {
 
   return (
     <>
-      <div className="carousel_card m-4 h-44 sm:h-38 md:h-44 lg:h-56 flex flex-row rounded-xl ">
+      <div className="carousel_card m-4  h-44 md:h-44 lg:h-56 flex-1 flex-row rounded-xl ">
         <NewSwiper />
-
       </div>
       <div className="events_outside_container relative flex">
         <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10">

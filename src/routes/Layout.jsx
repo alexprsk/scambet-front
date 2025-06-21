@@ -9,9 +9,10 @@ function Layout() {
   return (
     <>
       <AuthWrapper />
+
       <div className="relative min-h-screen flex">
         <SideBarLeft sports={SPORTS} icons={ICONS} />
-        <div className="flex-1 flex-col">
+        <div className="flex-1 flex-col ">
           <Outlet /> 
           <Footer />
         </div>
