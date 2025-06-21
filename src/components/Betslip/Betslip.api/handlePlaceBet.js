@@ -20,6 +20,12 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
         const authData = JSON.parse(localStorage.getItem("auth"));
         const token = authData?.access_token;
 
+        if (!token) {
+        await HandleLogout();
+        alert("Session expired. Please log in again.");
+        throw new Error("No access token found");
+    }
+
         const response = await fetch('/api/sportsbook/place_bet', {
             method: 'POST',
             headers: {
@@ -34,12 +40,19 @@ export default async function handlePlaceBet(selections, stake, setIsPlaced, use
             })
         });
 
+        const data = await response.json()
+
         if (!response.ok) {
-            throw new Error("Failed to place bet");
+            if (data?.detail === "Could not validate user") {
+                await HandleLogout(); 
+                alert("Session expired. Please log in again.");
+            }
+
+            throw new Error(data?.detail || "Could not fetch balance");
         }
 
-        const resData = await response.json();
-        console.log(resData)
+        
+        console.log(data)
         console.log("Sent payload:", {
             userId: String(user_id),
             stake,
