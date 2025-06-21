@@ -1,8 +1,6 @@
 import { useFetchMarkets } from '../hooks/useFetchMarkets.js';
 import { useOpenBets } from '../hooks/useOpenBets.js';
 import { useFetchEvents } from '../hooks/useFetchEvents.js';
-import { IMAGES } from '../constants/images.jsx';
-import Carousel from '../components/Carousel.jsx';
 import { UpcomingMarkets, PreLiveMarketsTop } from '../components/Upcoming/UpcomingMarkets.jsx';
 import Betslip from '../components/Betslip/BetSlip.jsx';
 import NewSwiper from '../components/NewSwiper.jsx';
