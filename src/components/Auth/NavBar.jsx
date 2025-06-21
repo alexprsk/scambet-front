@@ -126,7 +126,7 @@ export default function NavBar({ onLoginClick, onRegistrationClick }) {
             onClick={handleLogoutClick}
             type="button"
             id="logoutBtn"
-            className={`${authenticated ? "" : ""}  text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200 cursor-pointer`}
+            className={`${authenticated ? "" : "hidden"}  text-sm px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition duration-200 cursor-pointer`}
           >
             Logout
           </button>
