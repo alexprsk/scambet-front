@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import store from "../../store";
 
 export default async function HandleLogin(data) {
   const body = new URLSearchParams();
@@ -55,7 +55,7 @@ export async function HandleRegistration(data) {
 }
 
 
-export  async function HandleLogout(dispatch) {
+export  async function HandleLogout() {
 
     const cookies = document.cookie.split(";");
     
@@ -68,7 +68,7 @@ export  async function HandleLogout(dispatch) {
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
     }
     
-    dispatch({ type: "Logout" });
+    store.dispatch({ type: "Logout" }); 
 
   return "Cookie deleted "; 
 }
