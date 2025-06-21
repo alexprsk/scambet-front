@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux"
+
 export default async function HandleLogin(data) {
   const body = new URLSearchParams();
   body.append('username', data.username);
@@ -53,7 +55,8 @@ export async function HandleRegistration(data) {
 }
 
 
-export  async function HandleLogout() {
+export  async function HandleLogout(dispatch) {
+
     const cookies = document.cookie.split(";");
     
     // Iterate through all cookies and delete each one
@@ -65,6 +68,7 @@ export  async function HandleLogout() {
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
     }
     
+    dispatch({ type: "Logout" });
 
   return "Cookie deleted "; 
 }

@@ -1,4 +1,5 @@
 import { HandleLogout } from "../http";
+import store from "../../../store";
 
 export default async function refreshBalance() {
     const authData = JSON.parse(localStorage.getItem("auth"));
@@ -19,7 +20,7 @@ export default async function refreshBalance() {
 
       if (!response.ok) {
           if (data?.detail === "Could not validate user") {
-              await HandleLogout(); 
+              await HandleLogout(store.dispatch);
               alert("Session expired. Please log in again.");
           }
 
@@ -27,7 +28,7 @@ export default async function refreshBalance() {
       }
 
         
-        console.log(balance)
+        console.log(data)
 
         return data.user_balance;
         
