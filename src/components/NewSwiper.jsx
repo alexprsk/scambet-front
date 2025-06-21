@@ -15,11 +15,11 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export default function NewSwiper() {
     return (
-        <>
+        <> 
             <Swiper
-                slidesPerView={3}
+                slidesPerView={3.5}
                 centeredSlides={true}
-                spaceBetween={20}
+                spaceBetween={10}
                 grabCursor={true}
                 pagination={{ clickable: true }}
                 loop={true}
@@ -31,11 +31,12 @@ export default function NewSwiper() {
                 className="mySwiper"
             >
                 {IMAGES.map((image, key) => (
-  <SwiperSlide key={key}>
-    <img src={image.src} alt={`slide-${key}`} />
-  </SwiperSlide>
-))}
+                    <SwiperSlide key={key}>
+                        <img src={image.src} alt={`slide-${key}`} />
+                    </SwiperSlide>
+                ))}
             </Swiper>
+
         </>
     );
 }
