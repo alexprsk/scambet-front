@@ -1,2 +1,18 @@
 @import "tailwindcss";
 
+
+#root {
+  transform-origin: top left;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+
+  #root {
+    transform: scale(0.8);
+    width: 130%; /* counteract scale to avoid whitespace */
+  }
+}
+
+
+
