@@ -5,6 +5,7 @@ import { IMAGES } from '../constants/images.jsx';
 import Carousel from '../components/Carousel.jsx';
 import { UpcomingMarkets, PreLiveMarketsTop } from '../components/Upcoming/UpcomingMarkets.jsx';
 import Betslip from '../components/Betslip/BetSlip.jsx';
+import NewSwiper from '../components/NewSwiper.jsx';
 
 function UpcomingPage() {
   const markets = useFetchMarkets();
@@ -13,10 +14,9 @@ function UpcomingPage() {
 
   return (
     <>
-      <div className="carousel_card m-8 h-44 flex flex-row rounded-xl">
-        {IMAGES.map((image, index) => (
-          <Carousel key={index} {...image} />
-        ))}
+      <div className="carousel_card m-4 h-44 sm:h-36 md:h-44 lg:h-56 flex flex-row rounded-xl ">
+        <NewSwiper />
+
       </div>
       <div className="events_outside_container relative flex">
         <div className="events_container m-8 h-full flex-1 flex-col rounded-md z-10">

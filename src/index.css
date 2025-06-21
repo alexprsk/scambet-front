@@ -26,3 +26,26 @@
     background: #c0a0b9;
   }
 }
+
+
+.swiper {
+  width: 90vw;
+  height: 200px; 
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #444;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 200vw;
+  height: 100%;
+  object-fit: cover;
+}
